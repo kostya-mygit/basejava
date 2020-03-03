@@ -13,15 +13,9 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        if (size < storage.length) {
-            if (get(r.uuid) == null) {
-                storage[size] = r;
-                size++;
-            } else {
-                System.out.printf("A resume with %s already exists.\n", r.uuid);
-            }
-        } else {
-            System.out.println("Unable to save the resume. The storage is full.");
+        if (size < storage.length && get(r.uuid) == null) {
+            storage[size] = r;
+            size++;
         }
     }
 
@@ -41,9 +35,7 @@ public class ArrayStorage {
                 break;
             }
         }
-        if (index == size) {
-            System.out.printf("A resume with uuid %s does not exist.\n", uuid);
-        } else {
+        if (index != size) {
             for (int j = index; j < size; j++) {
                 if (j != size - 1) {
                     storage[j] = storage[j + 1];
