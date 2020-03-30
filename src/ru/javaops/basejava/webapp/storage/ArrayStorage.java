@@ -18,7 +18,7 @@ public class ArrayStorage {
 
     public void save(Resume r) {
         if (size < storage.length) {
-            if (get(r.getUuid()) == null) {
+            if (getIndex(r.getUuid()) == -1) {
                 storage[size] = r;
                 size++;
             } else {
@@ -31,12 +31,21 @@ public class ArrayStorage {
 
     public void update(Resume r) {
         int index = getIndex(r.getUuid());
-        if (index != -1) storage[index] = r;
+        if (index != -1) {
+            storage[index] = r;
+        } else {
+            printNotExistError(r.getUuid());
+        }
     }
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
-        return index != -1 ? storage[index] : null;
+        if (index != -1) {
+            return storage[index];
+        } else {
+            printNotExistError(uuid);
+            return null;
+        }
     }
 
     public void delete(String uuid) {
@@ -50,16 +59,6 @@ public class ArrayStorage {
         }
     }
 
-    private int getIndex(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i].getUuid())) {
-                return i;
-            }
-        }
-        System.out.printf("The resume with uuid %s doesn't exist.\n", uuid);
-        return -1;
-    }
-
     /**
      * @return array, contains only Resumes in storage (without null)
      */
@@ -69,5 +68,18 @@ public class ArrayStorage {
 
     public int size() {
         return size;
+    }
+
+    private int getIndex(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (uuid.equals(storage[i].getUuid())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void printNotExistError(String uuid) {
+        System.out.printf("The resume with uuid %s doesn't exist.\n", uuid);
     }
 }
