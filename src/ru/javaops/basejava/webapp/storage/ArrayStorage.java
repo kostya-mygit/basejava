@@ -2,18 +2,12 @@ package ru.javaops.basejava.webapp.storage;
 
 import ru.javaops.basejava.webapp.model.Resume;
 
-import java.util.Arrays;
-
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
-    }
-
+    @Override
     public void save(Resume r) {
         if (size < STORAGE_LIMIT) {
             if (getIndex(r.getUuid()) == -1) {
@@ -27,33 +21,19 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    public void update(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (index != -1) {
-            storage[index] = r;
-        } else {
-            printNotExistError(r.getUuid());
-        }
-    }
-
+    @Override
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index != -1) {
-            for (int j = index; j < size; j++) {
-                if (j != size - 1) storage[j] = storage[j + 1];
-                else storage[j] = null;
-            }
+            storage[index] = storage[size - 1];
+            storage[size - 1] = null;
             size--;
+        } else {
+            printNotExistError(uuid);
         }
     }
 
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
-    }
-
+    @Override
     protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
