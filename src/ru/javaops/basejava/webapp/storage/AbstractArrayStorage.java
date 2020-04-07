@@ -17,6 +17,21 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     @Override
+    public void save(Resume r) {
+        if (size < STORAGE_LIMIT) {
+            int index = getIndex(r.getUuid());
+            if (index < 0) {
+                insertElement(r, index);
+                size++;
+            } else {
+                System.out.printf("The resume with uuid %s already exists.\n", r.getUuid());
+            }
+        } else {
+            System.out.println("Unable to save the resume. The storage is full.");
+        }
+    }
+
+    @Override
     public void update(Resume r) {
         int index = getIndex(r.getUuid());
         if (index >= 0) {
@@ -37,7 +52,23 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
+    @Override
+    public void delete(String uuid) {
+        int index = getIndex(uuid);
+        if (index >= 0) {
+            fillDeletedElement(index);
+            storage[size - 1] = null;
+            size--;
+        } else {
+            printNotExistError(uuid);
+        }
+    }
+
     protected abstract int getIndex(String uuid);
+
+    protected abstract void insertElement(Resume r, int index);
+
+    protected abstract void fillDeletedElement(int index);
 
     protected void printNotExistError(String uuid) {
         System.out.printf("The resume with uuid %s doesn't exist.\n", uuid);
