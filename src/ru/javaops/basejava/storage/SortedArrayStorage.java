@@ -1,6 +1,6 @@
-package ru.javaops.basejava.webapp.storage;
+package ru.javaops.basejava.storage;
 
-import ru.javaops.basejava.webapp.model.Resume;
+import ru.javaops.basejava.model.Resume;
 
 import java.util.Arrays;
 
@@ -20,8 +20,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected int getIndex(String uuid) {
-        Resume resume = new Resume();
-        resume.setUuid(uuid);
+        Resume resume = new Resume(uuid);
         return Arrays.binarySearch(storage, 0, size, resume);
     }
 }

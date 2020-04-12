@@ -1,6 +1,9 @@
-package ru.javaops.basejava.webapp.storage;
+package ru.javaops.basejava.storage;
 
-import ru.javaops.basejava.webapp.model.Resume;
+import ru.javaops.basejava.exception.ExistStorageException;
+import ru.javaops.basejava.exception.NotExistStorageException;
+import ru.javaops.basejava.exception.StorageException;
+import ru.javaops.basejava.model.Resume;
 
 import java.util.Arrays;
 
@@ -24,10 +27,10 @@ public abstract class AbstractArrayStorage implements Storage {
                 insertElement(r, index);
                 size++;
             } else {
-                System.out.printf("The resume with uuid %s already exists.\n", r.getUuid());
+                throw new ExistStorageException(r.getUuid());
             }
         } else {
-            System.out.println("Unable to save the resume. The storage is full.");
+            throw new StorageException("Unable to save the resume. The storage is full.", r.getUuid());
         }
     }
 
@@ -37,7 +40,7 @@ public abstract class AbstractArrayStorage implements Storage {
         if (index >= 0) {
             storage[index] = r;
         } else {
-            printNotExistError(r.getUuid());
+            throw new NotExistStorageException(r.getUuid());
         }
     }
 
@@ -47,8 +50,7 @@ public abstract class AbstractArrayStorage implements Storage {
         if (index >= 0) {
             return storage[index];
         } else {
-            printNotExistError(uuid);
-            return null;
+            throw new NotExistStorageException(uuid);
         }
     }
 
@@ -60,7 +62,7 @@ public abstract class AbstractArrayStorage implements Storage {
             storage[size - 1] = null;
             size--;
         } else {
-            printNotExistError(uuid);
+            throw new NotExistStorageException(uuid);
         }
     }
 
@@ -69,10 +71,6 @@ public abstract class AbstractArrayStorage implements Storage {
     protected abstract void insertElement(Resume r, int index);
 
     protected abstract void fillDeletedElement(int index);
-
-    protected void printNotExistError(String uuid) {
-        System.out.printf("The resume with uuid %s doesn't exist.\n", uuid);
-    }
 
     /**
      * @return array, contains only Resumes in storage (without null)
