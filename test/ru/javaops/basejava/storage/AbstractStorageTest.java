@@ -44,6 +44,13 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
+    void save() {
+        Resume r = new Resume("uuid0");
+        storage.save(r);
+        assertArrayEquals(new Resume[]{r, RESUME_1, RESUME_2, RESUME_3}, storage.getAll());
+    }
+
+    @Test
     void saveAlreadyExist() {
         Exception exception = assertThrows(ExistStorageException.class, () -> storage.save(RESUME_1));
         String expectedMessage = "The resume with uuid uuid1 already exists.";
@@ -76,6 +83,12 @@ public abstract class AbstractStorageTest {
         Exception exception = assertThrows(NotExistStorageException.class, () -> storage.get("dummy"));
         String expectedMessage = "The resume with uuid dummy doesn't exist.";
         assertEquals(expectedMessage, exception.getMessage());
+    }
+
+    @Test
+    void delete() {
+        storage.delete(UUID_1);
+        assertArrayEquals(new Resume[]{RESUME_2, RESUME_3}, storage.getAll());
     }
 
     @Test

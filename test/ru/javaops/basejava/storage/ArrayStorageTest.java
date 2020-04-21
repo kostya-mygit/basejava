@@ -10,6 +10,7 @@ class ArrayStorageTest extends AbstractArrayStorageTest {
         super(new ArrayStorage());
     }
 
+    @Override
     @Test
     void save() {
         Resume r = new Resume("uuid0");
@@ -17,6 +18,7 @@ class ArrayStorageTest extends AbstractArrayStorageTest {
         assertArrayEquals(new Resume[]{RESUME_1, RESUME_2, RESUME_3, r}, storage.getAll());
     }
 
+    @Override
     @Test
     void delete() {
         storage.delete(UUID_1);
