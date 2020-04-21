@@ -1,6 +1,5 @@
 package ru.javaops.basejava.storage;
 
-import ru.javaops.basejava.exception.ExistStorageException;
 import ru.javaops.basejava.exception.StorageException;
 import ru.javaops.basejava.model.Resume;
 
@@ -20,13 +19,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     @Override
     public void save(Resume r) {
         if (size < STORAGE_LIMIT) {
-            int index = getIndex(r.getUuid());
-            if (index < 0) {
-                insertElement(r, index);
-                size++;
-            } else {
-                throw new ExistStorageException(r.getUuid());
-            }
+            super.save(r);
         } else {
             throw new StorageException("Unable to save the resume. The storage is full.", r.getUuid());
         }
@@ -46,21 +39,36 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume getElement(int index) {
-        return storage[index];
+    protected Resume getElement(String uuid) {
+        int index = getIndex(uuid);
+        if (index >= 0) {
+            return storage[index];
+        } else {
+            return null;
+        }
     }
 
     @Override
-    protected void setElement(Resume r, int index) {
-        storage[index] = r;
-    }
-
-    @Override
-    protected void removeElement(int index) {
-        fillDeletedElement(index);
+    protected void deleteElement(String uuid) {
+        fillDeletedElement(getIndex(uuid));
         storage[size - 1] = null;
         size--;
     }
 
+    @Override
+    protected void updateElement(Resume r) {
+        storage[getIndex(r.getUuid())] = r;
+    }
+
+    @Override
+    protected void saveElement(Resume r) {
+        insertElement(r, getIndex(r.getUuid()));
+        size++;
+    }
+
+    protected abstract void insertElement(Resume r, int index);
+
     protected abstract void fillDeletedElement(int index);
+
+    protected abstract int getIndex(String uuid);
 }

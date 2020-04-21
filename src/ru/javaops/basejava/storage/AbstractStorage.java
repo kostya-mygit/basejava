@@ -1,15 +1,26 @@
 package ru.javaops.basejava.storage;
 
+import ru.javaops.basejava.exception.ExistStorageException;
 import ru.javaops.basejava.exception.NotExistStorageException;
 import ru.javaops.basejava.model.Resume;
 
 abstract public class AbstractStorage implements Storage {
 
     @Override
+    public void save(Resume r) {
+        Resume resume = getElement(r.getUuid());
+        if (resume == null) {
+            saveElement(r);
+        } else {
+            throw new ExistStorageException(r.getUuid());
+        }
+    }
+
+    @Override
     public void update(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (index >= 0) {
-            setElement(r, index);
+        Resume resume = getElement(r.getUuid());
+        if (resume != null) {
+            updateElement(r);
         } else {
             throw new NotExistStorageException(r.getUuid());
         }
@@ -17,9 +28,9 @@ abstract public class AbstractStorage implements Storage {
 
     @Override
     public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index >= 0) {
-            return getElement(index);
+        Resume resume = getElement(uuid);
+        if (resume != null) {
+            return resume;
         } else {
             throw new NotExistStorageException(uuid);
         }
@@ -27,21 +38,19 @@ abstract public class AbstractStorage implements Storage {
 
     @Override
     public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index >= 0) {
-            removeElement(index);
+        Resume resume = getElement(uuid);
+        if (resume != null) {
+            deleteElement(uuid);
         } else {
             throw new NotExistStorageException(uuid);
         }
     }
 
-    protected abstract int getIndex(String uuid);
+    protected abstract Resume getElement(String uuid);
 
-    protected abstract Resume getElement(int index);
+    protected abstract void deleteElement(String uuid);
 
-    protected abstract void setElement(Resume r, int index);
+    protected abstract void updateElement(Resume r);
 
-    protected abstract void insertElement(Resume r, int index);
-
-    protected abstract void removeElement(int index);
+    protected abstract void saveElement(Resume r);
 }
