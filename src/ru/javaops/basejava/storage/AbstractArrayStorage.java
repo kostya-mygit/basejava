@@ -16,15 +16,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size = 0;
     }
 
-    @Override
-    public void save(Resume r) {
-        if (size < STORAGE_LIMIT) {
-            super.save(r);
-        } else {
-            throw new StorageException("Unable to save the resume. The storage is full.", r.getUuid());
-        }
-    }
-
     /**
      * @return array, contains only Resumes in storage (without null)
      */
@@ -39,36 +30,40 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume getElement(String uuid) {
-        int index = getIndex(uuid);
-        if (index >= 0) {
-            return storage[index];
-        } else {
-            return null;
-        }
+    protected Resume getElement(Object searchKey) {
+        return storage[(Integer) searchKey];
     }
 
     @Override
-    protected void deleteElement(String uuid) {
-        fillDeletedElement(getIndex(uuid));
+    protected void deleteElement(Object searchKey) {
+        fillDeletedElement((Integer) searchKey);
         storage[size - 1] = null;
         size--;
     }
 
     @Override
-    protected void updateElement(Resume r) {
-        storage[getIndex(r.getUuid())] = r;
+    protected void updateElement(Resume r, Object searchKey) {
+        storage[(Integer) searchKey] = r;
     }
 
     @Override
-    protected void saveElement(Resume r) {
-        insertElement(r, getIndex(r.getUuid()));
-        size++;
+    protected void saveElement(Resume r, Object searchKey) {
+        if (size < STORAGE_LIMIT) {
+            insertElement(r, (Integer) searchKey);
+            size++;
+        } else {
+            throw new StorageException("Unable to save the resume. The storage is full.", r.getUuid());
+        }
     }
+
+    @Override
+    protected boolean isExist(Object searchKey) {
+        return (Integer) searchKey >= 0;
+    }
+
+    protected abstract Integer getSearchKey(String uuid);
 
     protected abstract void insertElement(Resume r, int index);
 
     protected abstract void fillDeletedElement(int index);
-
-    protected abstract int getIndex(String uuid);
 }

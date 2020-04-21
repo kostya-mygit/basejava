@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
-    protected List<Resume> storage = new ArrayList<>();
+    private List<Resume> storage = new ArrayList<>();
 
     @Override
     public void clear() {
@@ -25,34 +25,34 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume getElement(String uuid) {
-        int index = getIndex(uuid);
-        if (index >= 0) {
-            return storage.get(index);
-        } else {
-            return null;
-        }
+    protected Resume getElement(Object searchKey) {
+        return storage.get((Integer) searchKey);
     }
 
     @Override
-    protected void deleteElement(String uuid) {
-        storage.remove(getIndex(uuid));
+    protected void deleteElement(Object searchKey) {
+        storage.remove(((Integer) searchKey).intValue());
     }
 
     @Override
-    protected void updateElement(Resume r) {
-        storage.set(getIndex(r.getUuid()), r);
+    protected void updateElement(Resume r, Object searchKey) {
+        storage.set((Integer) searchKey, r);
     }
 
     @Override
-    protected void saveElement(Resume r) {
-        int index = getIndex(r.getUuid());
-        int insertIndex = -index - 1;
+    protected void saveElement(Resume r, Object searchKey) {
+        int insertIndex = -(Integer) searchKey - 1;
         storage.add(insertIndex, r);
     }
 
-    protected int getIndex(String uuid) {
+    @Override
+    protected Integer getSearchKey(String uuid) {
         Resume resume = new Resume(uuid);
         return Collections.binarySearch(storage, resume);
+    }
+
+    @Override
+    protected boolean isExist(Object searchKey) {
+        return (Integer) searchKey >= 0;
     }
 }
