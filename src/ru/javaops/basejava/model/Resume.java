@@ -10,6 +10,8 @@ public class Resume {
     // Unique identifier
     private final String uuid;
 
+    private String fullName;
+
     public Resume() {
         this(UUID.randomUUID().toString());
     }
@@ -29,12 +31,15 @@ public class Resume {
 
         Resume resume = (Resume) o;
 
-        return uuid.equals(resume.uuid);
+        if (!uuid.equals(resume.uuid)) return false;
+        return fullName.equals(resume.fullName);
     }
 
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        int result = uuid.hashCode();
+        result = 31 * result + fullName.hashCode();
+        return result;
     }
 
     @Override
