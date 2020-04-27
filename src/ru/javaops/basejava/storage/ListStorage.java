@@ -48,7 +48,7 @@ public class ListStorage extends AbstractStorage {
     @Override
     protected Integer getSearchKey(String uuid) {
         Resume resume = new Resume(uuid);
-        return Collections.binarySearch(storage, resume);
+        return Collections.binarySearch(storage, resume, SortedArrayStorage.RESUME_COMPARATOR);
     }
 
     @Override

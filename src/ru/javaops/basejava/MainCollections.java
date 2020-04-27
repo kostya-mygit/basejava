@@ -51,5 +51,11 @@ public class MainCollections {
         for (Map.Entry<String, Resume> entry : map.entrySet()) {
             System.out.println(entry.getValue());
         }
+
+        List<Resume> resumes = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
+        //java.lang.UnsupportedOperationException because Arrays.asList returns its nested ArrayList, not ordinary ArrayList
+        //nested ArrayList doesn't contain method remove()
+        //resumes.remove(1);
+        System.out.println(resumes);
     }
 }
