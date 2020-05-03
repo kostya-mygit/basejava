@@ -6,6 +6,8 @@ import ru.javaops.basejava.exception.ExistStorageException;
 import ru.javaops.basejava.exception.NotExistStorageException;
 import ru.javaops.basejava.model.Resume;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractStorageTest {
@@ -20,9 +22,9 @@ public abstract class AbstractStorageTest {
     protected static final Resume RESUME_3;
 
     static {
-        RESUME_1 = new Resume(UUID_1);
-        RESUME_2 = new Resume(UUID_2);
-        RESUME_3 = new Resume(UUID_3);
+        RESUME_1 = new Resume(UUID_1, "B B");
+        RESUME_2 = new Resume(UUID_2, "A A");
+        RESUME_3 = new Resume(UUID_3, "A A");
     }
 
     public AbstractStorageTest(Storage storage) {
@@ -45,9 +47,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     void save() {
-        Resume r = new Resume("uuid0");
+        Resume r = new Resume("uuid0", "Full Name");
         storage.save(r);
-        assertArrayEquals(new Resume[]{r, RESUME_1, RESUME_2, RESUME_3}, storage.getAll());
+        assertEquals(List.of(RESUME_2, RESUME_3, RESUME_1, r), storage.getAllSorted());
     }
 
     @Test
@@ -59,9 +61,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     void update() {
-        Resume r = new Resume("uuid1");
+        Resume r = new Resume("uuid1", "Full Name");
         storage.update(r);
-        assertArrayEquals(new Resume[]{r, RESUME_2, RESUME_3}, storage.getAll());
+        assertEquals(List.of(RESUME_2, RESUME_3, r), storage.getAllSorted());
     }
 
     @Test
@@ -88,7 +90,7 @@ public abstract class AbstractStorageTest {
     @Test
     void delete() {
         storage.delete(UUID_1);
-        assertArrayEquals(new Resume[]{RESUME_2, RESUME_3}, storage.getAll());
+        assertEquals(List.of(RESUME_2, RESUME_3), storage.getAllSorted());
     }
 
     @Test
@@ -99,8 +101,8 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    void getAll() {
-        assertArrayEquals(new Resume[]{RESUME_1, RESUME_2, RESUME_3}, storage.getAll());
+    void getAllSorted() {
+        assertEquals(List.of(RESUME_2, RESUME_3, RESUME_1), storage.getAllSorted());
     }
 
     @Test

@@ -2,11 +2,10 @@ package ru.javaops.basejava.storage;
 
 import ru.javaops.basejava.model.Resume;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
-public class MapStorage extends AbstractStorage {
-    protected Map<String, Resume> storage = new TreeMap<>();
+public class MapUuidStorage extends AbstractStorage {
+    protected Map<String, Resume> storage = new HashMap<>();
 
     @Override
     public void clear() {
@@ -14,8 +13,10 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return storage.values().toArray(new Resume[0]);
+    public List<Resume> getAllSorted() {
+        ArrayList<Resume> resumes = new ArrayList<>(storage.values());
+        Collections.sort(resumes, RESUME_COMPARATOR);
+        return resumes;
     }
 
     @Override

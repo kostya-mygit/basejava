@@ -2,19 +2,17 @@ package ru.javaops.basejava.storage;
 
 import ru.javaops.basejava.model.Resume;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 public class SortedArrayStorage extends AbstractArrayStorage {
-
-    static final Comparator<Resume> RESUME_COMPARATOR = (o1, o2) -> o1.getUuid().compareTo(o2.getUuid());
 
     @Override
     protected Integer getSearchKey(String uuid) {
-        Resume resume = new Resume(uuid);
-        return Arrays.binarySearch(storage, 0, size, resume, RESUME_COMPARATOR);
+        for (int i = 0; i < size; i++) {
+            if (uuid.equals(storage[i].getUuid())) {
+                return i;
+            }
+        }
+        return -1;
     }
-
 
     @Override
     protected void insertElement(Resume r, int index) {

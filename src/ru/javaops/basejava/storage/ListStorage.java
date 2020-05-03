@@ -3,7 +3,6 @@ package ru.javaops.basejava.storage;
 import ru.javaops.basejava.model.Resume;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
@@ -15,8 +14,9 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return storage.toArray(new Resume[0]);
+    public List<Resume> getAllSorted() {
+        storage.sort(RESUME_COMPARATOR);
+        return storage;
     }
 
     @Override
@@ -41,18 +41,21 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void saveElement(Resume r, Object searchKey) {
-        int insertIndex = -(Integer) searchKey - 1;
-        storage.add(insertIndex, r);
+        storage.add(r);
     }
 
     @Override
     protected Integer getSearchKey(String uuid) {
-        Resume resume = new Resume(uuid);
-        return Collections.binarySearch(storage, resume, SortedArrayStorage.RESUME_COMPARATOR);
+        for (int i = 0; i < storage.size(); i++) {
+            if (storage.get(i).getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return null;
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return (Integer) searchKey >= 0;
+        return searchKey != null;
     }
 }
