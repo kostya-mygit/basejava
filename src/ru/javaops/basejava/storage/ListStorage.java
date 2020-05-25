@@ -14,12 +14,6 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public List<Resume> getAllSorted() {
-        storage.sort(RESUME_COMPARATOR);
-        return storage;
-    }
-
-    @Override
     public int size() {
         return storage.size();
     }
@@ -27,6 +21,11 @@ public class ListStorage extends AbstractStorage {
     @Override
     protected Resume getElement(Object searchKey) {
         return storage.get((Integer) searchKey);
+    }
+
+    @Override
+    protected List<Resume> getCopyOfAllElements() {
+        return new ArrayList<>(storage);
     }
 
     @Override
