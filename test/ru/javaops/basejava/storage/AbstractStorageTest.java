@@ -69,8 +69,8 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void updateNotExist() {
-        Exception exception = assertThrows(NotExistStorageException.class, () -> storage.update(new Resume("dummy")));
-        String expectedMessage = "The resume with uuid dummy doesn't exist.";
+        Exception exception = assertThrows(NotExistStorageException.class, () -> storage.update(new Resume("uuid0", "dummy")));
+        String expectedMessage = "The resume with uuid uuid0 doesn't exist.";
         assertEquals(expectedMessage, exception.getMessage());
     }
 
