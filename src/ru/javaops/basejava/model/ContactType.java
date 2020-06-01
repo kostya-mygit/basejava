@@ -6,7 +6,7 @@ public enum ContactType {
     EMAIL("E-mail"),
     GITHUB("Профиль GitHub"),
     STACKOVERFLOW("Профиль Stackoverflow"),
-    HOMEPAGE("Домашняя страница");
+    HOME_PAGE("Домашняя страница");
 
     private String title;
 

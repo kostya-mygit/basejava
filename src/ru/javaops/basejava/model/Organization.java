@@ -1,0 +1,71 @@
+package ru.javaops.basejava.model;
+
+import java.util.Objects;
+
+public class Organization {
+
+    private final Link homePage;
+    private final String startDate;
+    private final String endDate;
+    private final String title;
+    private final String description;
+
+    public Organization(String name, String url, String startDate, String endDate, String title, String description) {
+        Objects.requireNonNull(startDate, "startDate must not be null");
+        Objects.requireNonNull(endDate, "endDate must not be null");
+        Objects.requireNonNull(title, "title must not be null");
+        this.homePage = new Link(name, url);
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.title = title;
+        this.description = description;
+    }
+
+    public Link getHomePage() {
+        return homePage;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Organization that = (Organization) o;
+        return homePage.equals(that.homePage) &&
+                startDate.equals(that.startDate) &&
+                endDate.equals(that.endDate) &&
+                title.equals(that.title) &&
+                Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(homePage, startDate, endDate, title, description);
+    }
+
+    @Override
+    public String toString() {
+        return "Organization{" +
+                "homePage=" + homePage +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+}
