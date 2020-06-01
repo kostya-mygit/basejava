@@ -66,6 +66,11 @@ public class Entry {
 
     @Override
     public String toString() {
-        return title + "\n" + from + " - " + to + "\n" + description;
+        return "Entry{" +
+                "title='" + title + '\'' +
+                ", from='" + from + '\'' +
+                ", to='" + to + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

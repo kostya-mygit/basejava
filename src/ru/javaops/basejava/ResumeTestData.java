@@ -22,8 +22,8 @@ public class ResumeTestData {
 
         Map<SectionType, Section<?>> sections = new LinkedHashMap<>();
         resume.setSections(sections);
-        sections.put(SectionType.OBJECTIVE, new TextContentSection(SectionType.OBJECTIVE, "Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
-        sections.put(SectionType.PERSONAL, new TextContentSection(SectionType.PERSONAL, "Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
+        sections.put(SectionType.OBJECTIVE, new Section<>(SectionType.OBJECTIVE, "Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
+        sections.put(SectionType.PERSONAL, new Section<>(SectionType.PERSONAL, "Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
 
         List<String> achievements = new ArrayList<>();
         achievements.add("С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\", \"Многомодульный maven. Многопоточность. XML (JAXB/StAX). Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\". Организация онлайн стажировок и ведение проектов. Более 1000 выпускников.");
@@ -33,7 +33,7 @@ public class ResumeTestData {
         achievements.add("Создание JavaEE фреймворка для отказоустойчивого взаимодействия слабо-связанных сервисов (SOA-base архитектура, JAX-WS, JMS, AS Glassfish). Сбор статистики сервисов и информации о состоянии через систему мониторинга Nagios. Реализация онлайн клиента для администрирования и мониторинга системы по JMX (Jython/ Django).");
         achievements.add("Реализация протоколов по приему платежей всех основных платежных системы России (Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа.");
 
-        sections.put(SectionType.ACHIEVEMENTS, new ListContentSection<>(SectionType.ACHIEVEMENTS, achievements));
+        sections.put(SectionType.ACHIEVEMENTS, new Section<>(SectionType.ACHIEVEMENTS, achievements));
 
         List<String> qualifications = new ArrayList<>();
         qualifications.add("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2");
@@ -52,7 +52,7 @@ public class ResumeTestData {
         qualifications.add("Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектрирования, архитектурных шаблонов, UML, функционального программирования");
         qualifications.add("Родной русский, английский \"upper intermediate\"");
 
-        sections.put(SectionType.QUALIFICATIONS, new ListContentSection<>(SectionType.QUALIFICATIONS, qualifications));
+        sections.put(SectionType.QUALIFICATIONS, new Section<>(SectionType.QUALIFICATIONS, qualifications));
 
         List<Entry> experience = new ArrayList<>();
         experience.add(new Entry("Java Online Projects", "10/2013", "Сейчас", "Автор проекта. Создание, организация и проведение Java онлайн проектов и стажировок."));
@@ -64,7 +64,7 @@ public class ResumeTestData {
         experience.add(new Entry("Siemens AG", "01/2005", "02/2007", "Разработчик ПО. Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage (Java, Unix)."));
         experience.add(new Entry("Alcatel", "01/2005", "02/2007", "Разработчик ПО. Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage (Java, Unix)."));
 
-        sections.put(SectionType.EXPERIENCE, new ListContentSection<>(SectionType.EXPERIENCE, experience));
+        sections.put(SectionType.EXPERIENCE, new Section<>(SectionType.EXPERIENCE, experience));
 
         List<Entry> education = new ArrayList<>();
         education.add(new Entry("Coursera", "03/2013", "05/2013", "\"Functional Programming Principles in Scala\" by Martin Odersky"));
@@ -75,7 +75,7 @@ public class ResumeTestData {
         education.add(new Entry("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики", "09/1987", "07/1993", "Инженер (программист Fortran, C)"));
         education.add(new Entry("Заочная физико-техническая школа при МФТИ", "09/1984", "06/1987", "Закончил с отличием"));
 
-        sections.put(SectionType.EDUCATION, new ListContentSection<>(SectionType.EDUCATION, education));
+        sections.put(SectionType.EDUCATION, new Section<>(SectionType.EDUCATION, education));
     }
 
     public static void main(String[] args) {
