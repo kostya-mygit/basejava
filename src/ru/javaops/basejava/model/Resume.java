@@ -1,5 +1,6 @@
 package ru.javaops.basejava.model;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,6 +13,10 @@ public class Resume {
     private final String uuid;
 
     private final String fullName;
+
+    private Map<ContactType, Contact> contacts;
+
+    private Map<SectionType, Section<?>> sections;
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -30,6 +35,22 @@ public class Resume {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public Map<ContactType, Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Map<ContactType, Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    public Map<SectionType, Section<?>> getSections() {
+        return sections;
+    }
+
+    public void setSections(Map<SectionType, Section<?>> sections) {
+        this.sections = sections;
     }
 
     @Override
