@@ -14,6 +14,7 @@ public class MainFile {
         }
 
         File dir = new File("./src/ru/javaops/basejava");
+
         System.out.println(dir.isDirectory());
         String[] list = dir.list();
         if (list != null) {
@@ -21,6 +22,9 @@ public class MainFile {
                 System.out.println(name);
             }
         }
+        System.out.println();
+
+        printAllFilesInDirectory(dir);
 
         //before java 7
         FileInputStream fis1 = null;
@@ -44,6 +48,16 @@ public class MainFile {
             fis2.read();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void printAllFilesInDirectory(File directory) {
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.isDirectory()) printAllFilesInDirectory(f);
+                else System.out.println(f.getName());
+            }
         }
     }
 }
