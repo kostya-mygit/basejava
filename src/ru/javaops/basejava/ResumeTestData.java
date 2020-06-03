@@ -9,10 +9,8 @@ import java.util.*;
 
 public class ResumeTestData {
 
-    private static Resume resume;
-
-    static {
-        resume = new Resume("uuid1", "Григорий Кислин");
+    public static Resume create(String uuid, String fullName) {
+        Resume resume = new Resume(uuid, fullName);
 
         Map<ContactType, String> contacts = resume.getContacts();
         contacts.put(ContactType.PHONE, "+7(921) 855-0482");
@@ -77,9 +75,14 @@ public class ResumeTestData {
         education.add(new Organization("Заочная физико-техническая школа при МФТИ", null, DateUtil.of(1984, Month.SEPTEMBER), DateUtil.of(1987, Month.JUNE), "Закончил с отличием", null));
 
         sections.put(SectionType.EDUCATION, new OrganizationsSection(education));
+
+        return resume;
     }
 
+
     public static void main(String[] args) {
+        Resume resume = create("uuid1", "Григорий Кислин");
+
         System.out.println(resume.getUuid());
         System.out.println(resume.getFullName());
         System.out.println();

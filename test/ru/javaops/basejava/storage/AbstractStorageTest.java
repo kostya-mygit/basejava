@@ -2,9 +2,10 @@ package ru.javaops.basejava.storage;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.javaops.basejava.ResumeTestData;
 import ru.javaops.basejava.exception.ExistStorageException;
 import ru.javaops.basejava.exception.NotExistStorageException;
-import ru.javaops.basejava.model.Resume;
+import ru.javaops.basejava.model.*;
 
 import java.util.List;
 
@@ -17,15 +18,18 @@ public abstract class AbstractStorageTest {
     protected static final String UUID_1 = "uuid1";
     protected static final String UUID_2 = "uuid2";
     protected static final String UUID_3 = "uuid3";
+    protected static final String UUID_4 = "uuid4";
 
     protected static final Resume RESUME_1;
     protected static final Resume RESUME_2;
     protected static final Resume RESUME_3;
+    protected static final Resume RESUME_4;
 
     static {
         RESUME_1 = new Resume(UUID_1, "B B");
         RESUME_2 = new Resume(UUID_2, "A A");
         RESUME_3 = new Resume(UUID_3, "A A");
+        RESUME_4 = ResumeTestData.create(UUID_4, "Григорий Кислин");
     }
 
     public AbstractStorageTest(Storage storage) {
@@ -109,5 +113,17 @@ public abstract class AbstractStorageTest {
     @Test
     void size() {
         assertEquals(3, storage.size());
+    }
+
+    @Test
+    void resumeGetPhone() {
+        String phone = "+7(921) 855-0482";
+        assertEquals(phone, RESUME_4.getContact(ContactType.PHONE));
+    }
+
+    @Test
+    void resumeGetObjective() {
+        Section objective = new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям");
+        assertEquals(objective, RESUME_4.getSection(SectionType.OBJECTIVE));
     }
 }
