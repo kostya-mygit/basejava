@@ -70,8 +70,11 @@ public class ResumeTestData {
         education.add(new Organization("Luxoft", null, DateUtil.of(2011, Month.MARCH), DateUtil.of(2011, Month.APRIL), "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"", null));
         education.add(new Organization("Siemens AG", null, DateUtil.of(2005, Month.JANUARY), DateUtil.of(2005, Month.APRIL), "3 месяца обучения мобильным IN сетям (Берлин)", null));
         education.add(new Organization("Alcatel", null, DateUtil.of(1997, Month.SEPTEMBER), DateUtil.of(1998, Month.MARCH), "6 месяцев обучения цифровым телефонным сетям (Москва)", null));
-        education.add(new Organization("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики", null, DateUtil.of(1993, Month.SEPTEMBER), DateUtil.of(1996, Month.JULY), "Аспирантура (программист С, С++)", null));
-        education.add(new Organization("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики", null, DateUtil.of(1987, Month.SEPTEMBER), DateUtil.of(1993, Month.JULY), "Инженер (программист Fortran, C)", null));
+
+        List<Period> periods = new ArrayList<>();
+        periods.add(new Period(DateUtil.of(1993, Month.SEPTEMBER), DateUtil.of(1996, Month.JULY), "Аспирантура (программист С, С++)", null));
+        periods.add(new Period(DateUtil.of(1987, Month.SEPTEMBER), DateUtil.of(1993, Month.JULY), "Инженер (программист Fortran, C)", null));
+        education.add(new Organization("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики", null, periods));
         education.add(new Organization("Заочная физико-техническая школа при МФТИ", null, DateUtil.of(1984, Month.SEPTEMBER), DateUtil.of(1987, Month.JUNE), "Закончил с отличием", null));
 
         sections.put(SectionType.EDUCATION, new OrganizationsSection(education));
@@ -94,6 +97,7 @@ public class ResumeTestData {
             System.out.println(entry.getKey().getTitle() + ": ");
             System.out.println(entry.getValue());
         }
+        System.out.println();
 
         String contactSkype = resume.getContact(ContactType.SKYPE);
         System.out.println(contactSkype);
