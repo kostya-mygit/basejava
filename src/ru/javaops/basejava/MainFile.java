@@ -55,8 +55,11 @@ public class MainFile {
         File[] files = directory.listFiles();
         if (files != null) {
             for (File f : files) {
-                if (f.isDirectory()) printAllFilesInDirectory(f);
-                else System.out.println(f.getName());
+                if (f.isDirectory()) {
+                    printAllFilesInDirectory(f);
+                } else {
+                    System.out.println(f.getName());
+                }
             }
         }
     }

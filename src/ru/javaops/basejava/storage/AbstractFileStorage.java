@@ -37,24 +37,20 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         try {
             resume = doRead(searchKey);
         } catch (IOException e) {
-            throw new StorageException("IO Error", searchKey.getName(), e);
+            throw new StorageException("File read error", searchKey.getName(), e);
         }
         return resume;
     }
 
     @Override
     protected List<Resume> getCopyOfAllElements() {
-        List<Resume> resumes = null;
         File[] files = directory.listFiles();
-        if (files != null) {
-            resumes = new ArrayList<>();
-            for (File f : files) {
-                try {
-                    resumes.add(doRead(f));
-                } catch (IOException e) {
-                    throw new StorageException("IO Error", f.getName(), e);
-                }
-            }
+        if (files == null) {
+            throw new StorageException("Directory read error", null);
+        }
+        List<Resume> resumes = new ArrayList<>(files.length);
+        for (File f : files) {
+            resumes.add(getElement(f));
         }
         return resumes;
     }
@@ -64,7 +60,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         try {
             doWrite(r, searchKey);
         } catch (IOException e) {
-            throw new StorageException("IO Error", searchKey.getName(), e);
+            throw new StorageException("File write error", searchKey.getName(), e);
         }
     }
 
@@ -72,29 +68,36 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     protected void saveElement(Resume r, File searchKey) {
         try {
             searchKey.createNewFile();
-            doWrite(r, searchKey);
         } catch (IOException e) {
-            throw new StorageException("IO Error", searchKey.getName(), e);
+            throw new StorageException("File create error", searchKey.getName(), e);
         }
+        updateElement(r, searchKey);
     }
 
     @Override
     protected void deleteElement(File searchKey) {
-        searchKey.delete();
+        if (!searchKey.delete()) {
+            throw new StorageException("File delete error", searchKey.getName());
+        }
     }
 
     @Override
     public void clear() {
         File[] files = directory.listFiles();
         if (files != null) {
-            for (File f : files) f.delete();
+            for (File f : files) {
+                deleteElement(f);
+            }
         }
     }
 
     @Override
     public int size() {
         String[] files = directory.list();
-        return files == null ? 0 : files.length;
+        if (files == null) {
+            throw new StorageException("Directory read error", null);
+        }
+        return files.length;
     }
 
     protected abstract void doWrite(Resume r, File searchKey) throws IOException;

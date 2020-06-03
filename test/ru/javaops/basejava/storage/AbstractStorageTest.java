@@ -116,9 +116,9 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    void resumeGetPhone() {
-        String phone = "+7(921) 855-0482";
-        assertEquals(phone, RESUME_4.getContact(ContactType.PHONE));
+    void resumeGetGithub() {
+        String github = "https://github.com/gkislin";
+        assertEquals(github, RESUME_4.getContact(ContactType.GITHUB));
     }
 
     @Test
