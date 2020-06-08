@@ -3,8 +3,7 @@ package ru.javaops.basejava.storage;
 import ru.javaops.basejava.exception.StorageException;
 import ru.javaops.basejava.model.Resume;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -35,7 +34,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     protected Resume getElement(File searchKey) {
         Resume resume;
         try {
-            resume = doRead(searchKey);
+            resume = doRead(new BufferedInputStream(new FileInputStream(searchKey)));
         } catch (IOException e) {
             throw new StorageException("File read error", searchKey.getName(), e);
         }
@@ -58,7 +57,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected void updateElement(Resume r, File searchKey) {
         try {
-            doWrite(r, searchKey);
+            doWrite(r, new BufferedOutputStream(new FileOutputStream(searchKey)));
         } catch (IOException e) {
             throw new StorageException("File write error", searchKey.getName(), e);
         }
@@ -100,7 +99,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         return files.length;
     }
 
-    protected abstract void doWrite(Resume r, File searchKey) throws IOException;
+    protected abstract void doWrite(Resume r, OutputStream os) throws IOException;
 
-    protected abstract Resume doRead(File searchKey) throws IOException;
+    protected abstract Resume doRead(InputStream is) throws IOException;
 }
