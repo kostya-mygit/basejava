@@ -9,12 +9,86 @@ import java.util.Map;
 
 public class ResumeTestData {
 
-    public static Resume create(String uuid, String fullName) {
+    public static Resume createResume1(String uuid, String fullName) {
+        Resume resume1 = new Resume(uuid, fullName);
+
+        resume1.addContact(ContactType.PHONE, "11111");
+        resume1.addContact(ContactType.EMAIL, "email1@mail.ru");
+
+        resume1.addSection(SectionType.OBJECTIVE, new TextSection("Objective"));
+        resume1.addSection(SectionType.PERSONAL, new TextSection("Personal"));
+        resume1.addSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1", "Achievement2"));
+        resume1.addSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1", "Qualification2"));
+
+        List<Organization> experience = new ArrayList<>();
+        experience.add(new Organization("Organization2", null, new Organization.Position(2016, Month.FEBRUARY, "Software Designer", "Description")));
+        experience.add(new Organization("Organization1", null, new Organization.Position(2010, Month.SEPTEMBER, 2016, Month.JANUARY, "Software Designer", "Description")));
+        resume1.addSection(SectionType.EXPERIENCE, new OrganizationsSection(experience));
+
+        List<Organization> education = new ArrayList<>();
+        education.add(new Organization("Organization1", null, new Organization.Position(2004, Month.SEPTEMBER, 2010, Month.JANUARY, "University", null)));
+        resume1.addSection(SectionType.EDUCATION, new OrganizationsSection(education));
+
+        return resume1;
+    }
+
+    public static Resume createResume2(String uuid, String fullName) {
+        Resume resume2 = new Resume(uuid, fullName);
+
+        resume2.addContact(ContactType.PHONE, "22222");
+        resume2.addContact(ContactType.EMAIL, "email2@gmail.com");
+        resume2.addContact(ContactType.SKYPE, "skype2");
+        resume2.addContact(ContactType.GITHUB, "https://github.com/github2");
+        resume2.addContact(ContactType.HOME_PAGE, "https://homepage2.ru");
+
+        resume2.addSection(SectionType.OBJECTIVE, new TextSection("Objective"));
+        resume2.addSection(SectionType.PERSONAL, new TextSection("Personal"));
+        resume2.addSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1", "Achievement1", "Achievement3", "Achievement4"));
+        resume2.addSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1", "Qualification2", "Qualification3", "Qualification4"));
+
+        List<Organization> experience = new ArrayList<>();
+        experience.add(new Organization("Organization3", null, new Organization.Position(2018, Month.FEBRUARY, "Software Designer", "Description")));
+        experience.add(new Organization("Organization2", null, new Organization.Position(2015, Month.MARCH, 2018, Month.JANUARY, "Software Designer", "Description")));
+        experience.add(new Organization("Organization1", null, new Organization.Position(2010, Month.JUNE, 2015, Month.FEBRUARY, "Software Designer", "Description")));
+        experience.add(new Organization("Organization1", null, new Organization.Position(2005, Month.SEPTEMBER, 2010, Month.MAY, "QA Automation Engineer", "Description")));
+        resume2.addSection(SectionType.EXPERIENCE, new OrganizationsSection(experience));
+
+        List<Organization> education = new ArrayList<>();
+        education.add(new Organization("Organization2", null, new Organization.Position(2015, Month.JANUARY, 2015, Month.MARCH, "Courses", null)));
+        education.add(new Organization("Organization1", null, new Organization.Position(1999, Month.SEPTEMBER, 2005, Month.JUNE, "University", null)));
+        resume2.addSection(SectionType.EDUCATION, new OrganizationsSection(education));
+
+        return resume2;
+    }
+
+    public static Resume createResume3(String uuid, String fullName) {
+        Resume resume3 = new Resume(uuid, fullName);
+
+        resume3.addContact(ContactType.PHONE, "33333");
+        resume3.addContact(ContactType.EMAIL, "email3@mail.ru");
+
+        resume3.addSection(SectionType.OBJECTIVE, new TextSection("Objective"));
+        resume3.addSection(SectionType.PERSONAL, new TextSection("Personal"));
+        resume3.addSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1"));
+        resume3.addSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1"));
+
+        List<Organization> experience = new ArrayList<>();
+        experience.add(new Organization("Organization1", null, new Organization.Position(2018, Month.SEPTEMBER, "QA Automation Engineer", "Description")));
+        resume3.addSection(SectionType.EXPERIENCE, new OrganizationsSection(experience));
+
+        List<Organization> education = new ArrayList<>();
+        education.add(new Organization("Organization1", null, new Organization.Position(2014, Month.SEPTEMBER, 2018, Month.JANUARY, "University", null)));
+        resume3.addSection(SectionType.EDUCATION, new OrganizationsSection(education));
+
+        return resume3;
+    }
+
+    public static Resume createGK(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
 
         resume.addContact(ContactType.PHONE, "+7(921) 855-0482");
-        resume.addContact(ContactType.SKYPE, "skype:grigory.kislin");
-        resume.addContact(ContactType.EMAIL, "mailto:gkislin@yandex.ru");
+        resume.addContact(ContactType.SKYPE, "grigory.kislin");
+        resume.addContact(ContactType.EMAIL, "gkislin@yandex.ru");
         resume.addContact(ContactType.GITHUB, "https://github.com/gkislin");
         resume.addContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/548473/grigory-kislin");
         resume.addContact(ContactType.HOME_PAGE, "http://gkislin.ru");
@@ -76,9 +150,8 @@ public class ResumeTestData {
         return resume;
     }
 
-
     public static void main(String[] args) {
-        Resume resume = create("uuid1", "Григорий Кислин");
+        Resume resume = createGK("uuid1", "Григорий Кислин");
 
         System.out.println(resume.getUuid());
         System.out.println(resume.getFullName());

@@ -7,10 +7,11 @@ import ru.javaops.basejava.exception.ExistStorageException;
 import ru.javaops.basejava.exception.NotExistStorageException;
 import ru.javaops.basejava.model.*;
 
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractStorageTest {
     protected static final String STORAGE_DIR = "./storage";
@@ -28,10 +29,10 @@ public abstract class AbstractStorageTest {
     protected static final Resume RESUME_4;
 
     static {
-        RESUME_1 = new Resume(UUID_1, "B B");
-        RESUME_2 = new Resume(UUID_2, "A A");
-        RESUME_3 = new Resume(UUID_3, "A A");
-        RESUME_4 = ResumeTestData.create(UUID_4, "Григорий Кислин");
+        RESUME_1 = ResumeTestData.createResume1(UUID_1, "Anton A");
+        RESUME_2 = ResumeTestData.createResume2(UUID_2, "Alex A");
+        RESUME_3 = ResumeTestData.createResume3(UUID_3, "Alex A");
+        RESUME_4 = ResumeTestData.createGK(UUID_4, "Grigory Kislin");
     }
 
     public AbstractStorageTest(Storage storage) {
@@ -118,14 +119,52 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    void resumeGetGithub() {
-        String github = "https://github.com/gkislin";
-        assertEquals(github, RESUME_4.getContact(ContactType.GITHUB));
+    void resumeGetContacts() {
+        assertEquals("22222", RESUME_2.getContact(ContactType.PHONE));
+        assertEquals("email2@gmail.com", RESUME_2.getContact(ContactType.EMAIL));
+        assertEquals("skype2", RESUME_2.getContact(ContactType.SKYPE));
+        assertEquals("https://github.com/github2", RESUME_2.getContact(ContactType.GITHUB));
+        assertEquals("https://homepage2.ru", RESUME_2.getContact(ContactType.HOME_PAGE));
+    }
+
+    @Test
+    void resumeGetPersonal() {
+        Section personal = new TextSection("Personal");
+        assertEquals(personal, RESUME_1.getSection(SectionType.PERSONAL));
     }
 
     @Test
     void resumeGetObjective() {
-        Section objective = new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям");
-        assertEquals(objective, RESUME_4.getSection(SectionType.OBJECTIVE));
+        Section objective = new TextSection("Objective");
+        assertEquals(objective, RESUME_1.getSection(SectionType.OBJECTIVE));
+    }
+
+    @Test
+    void resumeGetAchievements() {
+        Section achievements = new ListSection("Achievement1", "Achievement2");
+        assertEquals(achievements, RESUME_1.getSection(SectionType.ACHIEVEMENTS));
+    }
+
+    @Test
+    void resumeGetQualifications() {
+        Section qualifications = new ListSection("Qualification1", "Qualification2");
+        assertEquals(qualifications, RESUME_1.getSection(SectionType.QUALIFICATIONS));
+    }
+
+    @Test
+    void resumeGetExperience() {
+        List<Organization> experience = new ArrayList<>();
+        experience.add(new Organization("Organization2", null, new Organization.Position(2016, Month.FEBRUARY, "Software Designer", "Description")));
+        experience.add(new Organization("Organization1", null, new Organization.Position(2010, Month.SEPTEMBER, 2016, Month.JANUARY, "Software Designer", "Description")));
+        OrganizationsSection organizationsSection = new OrganizationsSection(experience);
+        assertEquals(organizationsSection, RESUME_1.getSection(SectionType.EXPERIENCE));
+    }
+
+    @Test
+    void resumeGetEducation() {
+        List<Organization> education = new ArrayList<>();
+        education.add(new Organization("Organization1", null, new Organization.Position(2004, Month.SEPTEMBER, 2010, Month.JANUARY, "University", null)));
+        OrganizationsSection organizationsSection = new OrganizationsSection(education);
+        assertEquals(organizationsSection, RESUME_1.getSection(SectionType.EDUCATION));
     }
 }
