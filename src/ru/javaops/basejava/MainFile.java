@@ -24,7 +24,8 @@ public class MainFile {
         }
         System.out.println();
 
-        printAllFilesInDirectory(dir);
+        System.out.println("Structure of directory " + dir.getName() + ":");
+        printAllFilesInDirectory(dir, "");
 
         //before java 7
         FileInputStream fis1 = null;
@@ -51,14 +52,15 @@ public class MainFile {
         }
     }
 
-    public static void printAllFilesInDirectory(File directory) {
+    public static void printAllFilesInDirectory(File directory, String paragraph) {
         File[] files = directory.listFiles();
         if (files != null) {
             for (File f : files) {
                 if (f.isDirectory()) {
-                    printAllFilesInDirectory(f);
+                    System.out.println(paragraph + "<" + f.getName() + ">");
+                    printAllFilesInDirectory(f, paragraph + "   ");
                 } else {
-                    System.out.println(f.getName());
+                    System.out.println(paragraph + f.getName());
                 }
             }
         }
