@@ -5,7 +5,7 @@ import ru.javaops.basejava.model.Resume;
 
 import java.io.*;
 
-public class ObjectStreamSerializer implements StreamSerializer {
+public class ObjectStreamSerializer implements Serializer {
 
     @Override
     public Resume doRead(InputStream is) throws IOException {

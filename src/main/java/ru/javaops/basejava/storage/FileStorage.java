@@ -2,7 +2,7 @@ package ru.javaops.basejava.storage;
 
 import ru.javaops.basejava.exception.StorageException;
 import ru.javaops.basejava.model.Resume;
-import ru.javaops.basejava.storage.serializer.StreamSerializer;
+import ru.javaops.basejava.storage.serializer.Serializer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,9 +12,9 @@ import java.util.Objects;
 public class FileStorage extends AbstractStorage<File> {
     private File directory;
 
-    private StreamSerializer streamSerializer;
+    private Serializer serializer;
 
-    protected FileStorage(File directory, StreamSerializer streamSerializer) {
+    protected FileStorage(File directory, Serializer serializer) {
         Objects.requireNonNull(directory, "directory must not be null");
         this.directory = directory;
         if (!directory.isDirectory())
@@ -22,7 +22,7 @@ public class FileStorage extends AbstractStorage<File> {
         if (!directory.canRead()) throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable");
         if (!directory.canWrite()) throw new IllegalArgumentException(directory.getAbsolutePath() + " is not writable");
 
-        this.streamSerializer = streamSerializer;
+        this.serializer = serializer;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class FileStorage extends AbstractStorage<File> {
     protected Resume getElement(File searchKey) {
         Resume resume;
         try {
-            resume = streamSerializer.doRead(new BufferedInputStream(new FileInputStream(searchKey)));
+            resume = serializer.doRead(new BufferedInputStream(new FileInputStream(searchKey)));
         } catch (IOException e) {
             throw new StorageException("File read error", searchKey.getName(), e);
         }
@@ -62,7 +62,7 @@ public class FileStorage extends AbstractStorage<File> {
     @Override
     protected void updateElement(Resume r, File searchKey) {
         try {
-            streamSerializer.doWrite(r, new BufferedOutputStream(new FileOutputStream(searchKey)));
+            serializer.doWrite(r, new BufferedOutputStream(new FileOutputStream(searchKey)));
         } catch (IOException e) {
             throw new StorageException("File write error", searchKey.getName(), e);
         }
