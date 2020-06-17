@@ -41,7 +41,7 @@
             <key>ACHIEVEMENTS</key>
             <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <items>Achievement1</items>
-                <items>Achievement1</items>
+                <items>Achievement2</items>
                 <items>Achievement3</items>
                 <items>Achievement4</items>
             </value>

@@ -43,7 +43,7 @@ public class ResumeTestData {
 
         resume2.addSection(SectionType.OBJECTIVE, new TextSection("Objective"));
         resume2.addSection(SectionType.PERSONAL, new TextSection("Personal"));
-        resume2.addSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1", "Achievement1", "Achievement3", "Achievement4"));
+        resume2.addSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1", "Achievement2", "Achievement3", "Achievement4"));
         resume2.addSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1", "Qualification2", "Qualification3", "Qualification4"));
 
         List<Organization> experience = new ArrayList<>();
