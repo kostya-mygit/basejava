@@ -15,8 +15,8 @@ public class ResumeTestData {
         resume1.addContact(ContactType.PHONE, "11111");
         resume1.addContact(ContactType.EMAIL, "email1@mail.ru");
 
-        resume1.addSection(SectionType.OBJECTIVE, new TextSection("Objective"));
         resume1.addSection(SectionType.PERSONAL, new TextSection("Personal"));
+        resume1.addSection(SectionType.OBJECTIVE, new TextSection("Objective"));
         resume1.addSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1", "Achievement2"));
         resume1.addSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1", "Qualification2"));
 
@@ -41,8 +41,8 @@ public class ResumeTestData {
         resume2.addContact(ContactType.GITHUB, "https://github.com/github2");
         resume2.addContact(ContactType.HOME_PAGE, "https://homepage2.ru");
 
-        resume2.addSection(SectionType.OBJECTIVE, new TextSection("Objective"));
         resume2.addSection(SectionType.PERSONAL, new TextSection("Personal"));
+        resume2.addSection(SectionType.OBJECTIVE, new TextSection("Objective"));
         resume2.addSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1", "Achievement2", "Achievement3", "Achievement4"));
         resume2.addSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1", "Qualification2", "Qualification3", "Qualification4"));
 
@@ -67,8 +67,8 @@ public class ResumeTestData {
         resume3.addContact(ContactType.PHONE, "33333");
         resume3.addContact(ContactType.EMAIL, "email3@mail.ru");
 
-        resume3.addSection(SectionType.OBJECTIVE, new TextSection("Objective"));
         resume3.addSection(SectionType.PERSONAL, new TextSection("Personal"));
+        resume3.addSection(SectionType.OBJECTIVE, new TextSection("Objective"));
         resume3.addSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1"));
         resume3.addSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1"));
 
@@ -93,8 +93,8 @@ public class ResumeTestData {
         resume.addContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/548473/grigory-kislin");
         resume.addContact(ContactType.HOME_PAGE, "http://gkislin.ru");
 
-        resume.addSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
         resume.addSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
+        resume.addSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
 
         List<String> achievements = new ArrayList<>();
         achievements.add("С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\", \"Многомодульный maven. Многопоточность. XML (JAXB/StAX). Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\". Организация онлайн стажировок и ведение проектов. Более 1000 выпускников.");
