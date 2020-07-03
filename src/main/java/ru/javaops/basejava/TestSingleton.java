@@ -1,49 +1,99 @@
 package ru.javaops.basejava;
 
-import ru.javaops.basejava.model.SectionType;
-
+//https://habr.com/ru/post/27108/
+//https://habr.com/ru/post/129494/
 public class TestSingleton {
     public static void main(String[] args) {
-        EagerSingleton instance1 = EagerSingleton.getINSTANCE();
-        LazySingleton instance2 = LazySingleton.getINSTANCE();
+        EagerSingleton eagerSingleton = EagerSingleton.getINSTANCE();
+        LazySingleton lazySingleton = LazySingleton.getINSTANCE();
+        OnDemandHolderSingleton onDemandHolderSingleton = new OnDemandHolderSingleton();
+        SynchronizedSingleton synchronizedSingleton = new SynchronizedSingleton();
+        DoubleCheckedLockingWithVolatileSingleton doubleCheckedLockingWithVolatileSingleton = new DoubleCheckedLockingWithVolatileSingleton();
 
-        EnumSingleton instance3 = EnumSingleton.INSTANCE;
-        System.out.println(instance3);
-        EnumSingleton instance4 = EnumSingleton.valueOf("INSTANCE");
-        System.out.println(instance4);
+        EnumSingleton enumSingleton1 = EnumSingleton.INSTANCE;
+        System.out.println(enumSingleton1);
+        EnumSingleton enumSingleton2 = EnumSingleton.valueOf("INSTANCE");
+        System.out.println(enumSingleton2);
+    }
 
-        for (SectionType type : SectionType.values()) {
-            System.out.println(type.ordinal() + " " + type.getTitle());
+    //works in multithreading
+    private static class EagerSingleton {
+        private static final EagerSingleton INSTANCE = new EagerSingleton();
+
+        private EagerSingleton() {
+        }
+
+        public static EagerSingleton getINSTANCE() {
+            return INSTANCE;
         }
     }
-}
 
-class EagerSingleton {
-    private static final EagerSingleton INSTANCE = new EagerSingleton();
+    //doesn't work in multithreading
+    private static class LazySingleton {
+        private static LazySingleton instance;
 
-    private EagerSingleton() {
-    }
-
-    public static EagerSingleton getINSTANCE() {
-        return INSTANCE;
-    }
-}
-
-class LazySingleton {
-    private static LazySingleton instance;
-
-    private LazySingleton() {
-    }
-
-    public static LazySingleton getINSTANCE() {
-        if (instance == null) {
-            instance = new LazySingleton();
+        private LazySingleton() {
         }
-        return instance;
-    }
-}
 
-enum EnumSingleton {
-    INSTANCE
+        public static LazySingleton getINSTANCE() {
+            if (instance == null) {
+                instance = new LazySingleton();
+            }
+            return instance;
+        }
+    }
+
+    //works in multithreading
+    private static class OnDemandHolderSingleton {
+        private OnDemandHolderSingleton() {
+        }
+
+        private static class SingletonHolder {
+            private static final OnDemandHolderSingleton INSTANCE = new OnDemandHolderSingleton();
+        }
+
+        public static OnDemandHolderSingleton getINSTANCE() {
+            return SingletonHolder.INSTANCE;
+        }
+    }
+
+    //works in multithreading
+    private static class SynchronizedSingleton {
+        private static SynchronizedSingleton instance;
+
+        private SynchronizedSingleton() {
+        }
+
+        public static synchronized SynchronizedSingleton getInstance() {
+            if (instance == null) {
+                instance = new SynchronizedSingleton();
+            }
+            return instance;
+        }
+    }
+
+    //works in multithreading
+    private static class DoubleCheckedLockingWithVolatileSingleton {
+        private static volatile SynchronizedSingleton instance;
+
+        private DoubleCheckedLockingWithVolatileSingleton() {
+        }
+
+        public static SynchronizedSingleton getInstance() {
+            if (instance == null) {
+                synchronized (DoubleCheckedLockingWithVolatileSingleton.class) {
+                    if (instance == null) {
+                        instance = new SynchronizedSingleton();
+                    }
+                }
+            }
+            return instance;
+        }
+    }
+
+    //works in multithreading
+    private enum EnumSingleton {
+        INSTANCE
+    }
 }
 
