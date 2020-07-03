@@ -8,6 +8,11 @@ public class MainConcurrency {
     private static int counter = 0;
     private static final Object LOCK = new Object();
 
+    private static int accountA = 100;
+    private static int accountB = 200;
+    private static final Object LOCK_A = new Object();
+    private static final Object LOCK_B = new Object();
+
     public static void main(String[] args) throws InterruptedException {
         System.out.println(Thread.currentThread().getName());
 
@@ -57,6 +62,23 @@ public class MainConcurrency {
         });
 
         System.out.println(counter);
+        System.out.println();
+
+        System.out.println("Transferring");
+        for (int i = 0; i < 1; i++) {
+            Thread t1 = new Thread(() -> {
+                mainConcurrency.transferAtoB(200);
+            });
+            t1.start();
+            System.out.println(t1.getName() + " started");
+
+            Thread t2 = new Thread(() -> {
+                mainConcurrency.transferBtoA(300);
+            });
+            t2.start();
+            System.out.println(t2.getName() + " started");
+        }
+
     }
 
     private static synchronized void staticIncrement1() {
@@ -93,5 +115,39 @@ public class MainConcurrency {
         synchronized (LOCK) {
             counter++;
         }
+    }
+
+    private synchronized void transferAtoB(int amount) {
+        while (accountA < amount) {
+            System.out.println(Thread.currentThread().getName() + " before wait");
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + " after wait");
+        }
+        accountA -= amount;
+        accountB += amount;
+        System.out.println("transferred from A to B : " + amount);
+        System.out.println("accountA=" + accountA + ", accountB=" + accountB);
+        notifyAll();
+    }
+
+    private synchronized void transferBtoA(int amount) {
+        while (accountB < amount) {
+            System.out.println(Thread.currentThread().getName() + " before wait");
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + " after wait");
+        }
+        accountB -= amount;
+        accountA += amount;
+        System.out.println("transferred from B to A : " + amount);
+        System.out.println("accountA=" + accountA + ", accountB=" + accountB);
+        notifyAll();
     }
 }
