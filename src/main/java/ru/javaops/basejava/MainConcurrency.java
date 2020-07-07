@@ -64,7 +64,13 @@ public class MainConcurrency {
         System.out.println(counter);
         System.out.println();
 
-        System.out.println("Transferring");
+        final String lock1 = "lock1";
+        final String lock2 = "lock2";
+        System.out.println("DeadLock");
+        deadLock(lock1, lock2);
+        deadLock(lock2, lock1);
+
+        /*System.out.println("Transferring");
         for (int i = 0; i < 1; i++) {
             Thread t1 = new Thread(() -> {
                 mainConcurrency.transferAtoB(200);
@@ -77,7 +83,7 @@ public class MainConcurrency {
             });
             t2.start();
             System.out.println(t2.getName() + " started");
-        }
+        }*/
 
     }
 
@@ -115,6 +121,25 @@ public class MainConcurrency {
         synchronized (LOCK) {
             counter++;
         }
+    }
+
+    private static void deadLock(Object lock1, Object lock2) {
+        new Thread(()->{
+            System.out.println(Thread.currentThread().getName() + " started");
+            System.out.println("Waiting for " + lock1);
+            synchronized (lock1) {
+                System.out.println("Holding " + lock1);
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Waiting for " + lock2);
+                synchronized (lock2){
+                    System.out.println("Holding " + lock2);
+                }
+            }
+        }).start();
     }
 
     private synchronized void transferAtoB(int amount) {
