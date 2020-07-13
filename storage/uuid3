@@ -43,6 +43,7 @@
                 <organizations>
                     <homePage>
                         <name>Organization1</name>
+                        <url></url>
                     </homePage>
                     <positions>
                         <startDate>2018-09-01</startDate>
@@ -59,11 +60,13 @@
                 <organizations>
                     <homePage>
                         <name>Organization1</name>
+                        <url></url>
                     </homePage>
                     <positions>
                         <startDate>2014-09-01</startDate>
                         <endDate>2018-01-01</endDate>
                         <title>University</title>
+                        <description></description>
                     </positions>
                 </organizations>
             </value>

@@ -61,6 +61,7 @@
                 <organizations>
                     <homePage>
                         <name>Organization3</name>
+                        <url></url>
                     </homePage>
                     <positions>
                         <startDate>2018-02-01</startDate>
@@ -72,6 +73,7 @@
                 <organizations>
                     <homePage>
                         <name>Organization2</name>
+                        <url></url>
                     </homePage>
                     <positions>
                         <startDate>2015-03-01</startDate>
@@ -83,6 +85,7 @@
                 <organizations>
                     <homePage>
                         <name>Organization1</name>
+                        <url></url>
                     </homePage>
                     <positions>
                         <startDate>2010-06-01</startDate>
@@ -94,6 +97,7 @@
                 <organizations>
                     <homePage>
                         <name>Organization1</name>
+                        <url></url>
                     </homePage>
                     <positions>
                         <startDate>2005-09-01</startDate>
@@ -110,21 +114,25 @@
                 <organizations>
                     <homePage>
                         <name>Organization2</name>
+                        <url></url>
                     </homePage>
                     <positions>
                         <startDate>2015-01-01</startDate>
                         <endDate>2015-03-01</endDate>
                         <title>Courses</title>
+                        <description></description>
                     </positions>
                 </organizations>
                 <organizations>
                     <homePage>
                         <name>Organization1</name>
+                        <url></url>
                     </homePage>
                     <positions>
                         <startDate>1999-09-01</startDate>
                         <endDate>2005-06-01</endDate>
                         <title>University</title>
+                        <description></description>
                     </positions>
                 </organizations>
             </value>
