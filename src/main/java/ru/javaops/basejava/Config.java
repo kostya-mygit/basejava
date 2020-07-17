@@ -24,6 +24,10 @@ public class Config {
         return INSTANCE;
     }
 
+    public Properties getProperties() {
+        return properties;
+    }
+
     public String getStorageDir() {
         return storageDir;
     }

@@ -12,7 +12,7 @@ public class ResumeTestData {
     public static Resume createResume1(String uuid, String fullName) {
         Resume resume1 = new Resume(uuid, fullName);
 
-        resume1.addContact(ContactType.PHONE, "11111");
+        /*resume1.addContact(ContactType.PHONE, "11111");
         resume1.addContact(ContactType.EMAIL, "email1@mail.ru");
 
         resume1.addSection(SectionType.PERSONAL, new TextSection("Personal"));
@@ -27,7 +27,7 @@ public class ResumeTestData {
 
         List<Organization> education = new ArrayList<>();
         education.add(new Organization("Organization1", null, new Organization.Position(2004, Month.SEPTEMBER, 2010, Month.JANUARY, "University", null)));
-        resume1.addSection(SectionType.EDUCATION, new OrganizationsSection(education));
+        resume1.addSection(SectionType.EDUCATION, new OrganizationsSection(education));*/
 
         return resume1;
     }
@@ -35,7 +35,7 @@ public class ResumeTestData {
     public static Resume createResume2(String uuid, String fullName) {
         Resume resume2 = new Resume(uuid, fullName);
 
-        resume2.addContact(ContactType.PHONE, "22222");
+        /*resume2.addContact(ContactType.PHONE, "22222");
         resume2.addContact(ContactType.EMAIL, "email2@gmail.com");
         resume2.addContact(ContactType.SKYPE, "skype2");
         resume2.addContact(ContactType.GITHUB, "https://github.com/github2");
@@ -56,7 +56,7 @@ public class ResumeTestData {
         List<Organization> education = new ArrayList<>();
         education.add(new Organization("Organization2", null, new Organization.Position(2015, Month.JANUARY, 2015, Month.MARCH, "Courses", null)));
         education.add(new Organization("Organization1", null, new Organization.Position(1999, Month.SEPTEMBER, 2005, Month.JUNE, "University", null)));
-        resume2.addSection(SectionType.EDUCATION, new OrganizationsSection(education));
+        resume2.addSection(SectionType.EDUCATION, new OrganizationsSection(education));*/
 
         return resume2;
     }
@@ -64,7 +64,7 @@ public class ResumeTestData {
     public static Resume createResume3(String uuid, String fullName) {
         Resume resume3 = new Resume(uuid, fullName);
 
-        resume3.addContact(ContactType.PHONE, "33333");
+        /*resume3.addContact(ContactType.PHONE, "33333");
         resume3.addContact(ContactType.EMAIL, "email3@mail.ru");
 
         resume3.addSection(SectionType.PERSONAL, new TextSection("Personal"));
@@ -78,7 +78,7 @@ public class ResumeTestData {
 
         List<Organization> education = new ArrayList<>();
         education.add(new Organization("Organization1", null, new Organization.Position(2014, Month.SEPTEMBER, 2018, Month.JANUARY, "University", null)));
-        resume3.addSection(SectionType.EDUCATION, new OrganizationsSection(education));
+        resume3.addSection(SectionType.EDUCATION, new OrganizationsSection(education));*/
 
         return resume3;
     }
