@@ -16,21 +16,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class AbstractStorageTest {
-    protected static final String STORAGE_DIR = Config.getINSTANCE().getStorageDir();
+    protected static final String STORAGE_DIR = Config.getInstance().getStorageDir();
 
     protected Storage storage;
 
-    protected static final String UUID_1 = "uuid1";
-    protected static final String UUID_2 = "uuid2";
-    protected static final String UUID_3 = "uuid3";
-    protected static final String UUID_4 = "uuid4";
+    protected static final String UUID_0 = "a751ceb9-c3bf-44e9-a073-a0c130eee359";
+    protected static final String UUID_1 = "ba18773e-5b32-41c1-bfa7-9eb225495998";
+    protected static final String UUID_2 = "c04c0f94-6126-460a-85a2-840adc38866d";
+    protected static final String UUID_3 = "df34b72f-07ec-4086-808d-abd2ce972955";
+    protected static final String UUID_4 = "f658f9e4-a949-4bc6-ac27-1398d29bf03a";
 
+    protected static final Resume RESUME_0;
     protected static final Resume RESUME_1;
     protected static final Resume RESUME_2;
     protected static final Resume RESUME_3;
     protected static final Resume RESUME_4;
 
     static {
+        RESUME_0 = ResumeTestData.createResume1(UUID_0, "Full Name");
         RESUME_1 = ResumeTestData.createResume1(UUID_1, "Anton A");
         RESUME_2 = ResumeTestData.createResume2(UUID_2, "Alex A");
         RESUME_3 = ResumeTestData.createResume3(UUID_3, "Alex A");
@@ -57,29 +60,28 @@ public abstract class AbstractStorageTest {
 
     @Test
     void save() {
-        Resume r = new Resume("uuid0", "Full Name");
-        storage.save(r);
-        assertEquals(List.of(RESUME_2, RESUME_3, RESUME_1, r), storage.getAllSorted());
+        storage.save(RESUME_0);
+        assertEquals(List.of(RESUME_2, RESUME_3, RESUME_1, RESUME_0), storage.getAllSorted());
     }
 
     @Test
     void saveAlreadyExist() {
         Exception exception = assertThrows(ExistStorageException.class, () -> storage.save(RESUME_1));
-        String expectedMessage = "The resume with uuid uuid1 already exists.";
+        String expectedMessage = "The resume with uuid " + UUID_1 + " already exists.";
         assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
     void update() {
-        Resume r = new Resume("uuid1", "Full Name");
+        Resume r = new Resume(UUID_1, "Full Name");
         storage.update(r);
         assertEquals(List.of(RESUME_2, RESUME_3, r), storage.getAllSorted());
     }
 
     @Test
     public void updateNotExist() {
-        Exception exception = assertThrows(NotExistStorageException.class, () -> storage.update(new Resume("uuid0", "dummy")));
-        String expectedMessage = "The resume with uuid uuid0 doesn't exist.";
+        Exception exception = assertThrows(NotExistStorageException.class, () -> storage.update(RESUME_0));
+        String expectedMessage = "The resume with uuid " + UUID_0 + " doesn't exist.";
         assertEquals(expectedMessage, exception.getMessage());
     }
 
@@ -92,8 +94,8 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getNotExist() {
-        Exception exception = assertThrows(NotExistStorageException.class, () -> storage.get("dummy"));
-        String expectedMessage = "The resume with uuid dummy doesn't exist.";
+        Exception exception = assertThrows(NotExistStorageException.class, () -> storage.get(UUID_0));
+        String expectedMessage = "The resume with uuid " + UUID_0 + " doesn't exist.";
         assertEquals(expectedMessage, exception.getMessage());
     }
 
@@ -105,8 +107,8 @@ public abstract class AbstractStorageTest {
 
     @Test
     void deleteNotExist() {
-        Exception exception = assertThrows(NotExistStorageException.class, () -> storage.delete("dummy"));
-        String expectedMessage = "The resume with uuid dummy doesn't exist.";
+        Exception exception = assertThrows(NotExistStorageException.class, () -> storage.delete(UUID_0));
+        String expectedMessage = "The resume with uuid " + UUID_0 + " doesn't exist.";
         assertEquals(expectedMessage, exception.getMessage());
     }
 
