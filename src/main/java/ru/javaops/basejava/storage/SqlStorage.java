@@ -6,13 +6,8 @@ import ru.javaops.basejava.model.ContactType;
 import ru.javaops.basejava.model.Resume;
 import ru.javaops.basejava.sql.SqlHelper;
 
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.sql.*;
+import java.util.*;
 
 public class SqlStorage implements Storage {
     private final SqlHelper sqlHelper;
@@ -43,15 +38,7 @@ public class SqlStorage implements Storage {
                     else throw new SQLException(e);
                 }
             }
-            try (PreparedStatement ps = connection.prepareStatement("INSERT INTO contact (resume_uuid, type, value) VALUES (?, ?, ?)")) {
-                for (Map.Entry<ContactType, String> entry : r.getContacts().entrySet()) {
-                    ps.setString(1, r.getUuid());
-                    ps.setString(2, entry.getKey().name());
-                    ps.setString(3, entry.getValue());
-                    ps.addBatch();
-                }
-                ps.executeBatch();
-            }
+            insertContacts(connection, r);
             return null;
         });
     }
@@ -66,15 +53,8 @@ public class SqlStorage implements Storage {
                     throw new NotExistStorageException(r.getUuid());
                 }
             }
-            try (PreparedStatement ps = connection.prepareStatement("UPDATE contact c SET value = ? WHERE c.type = ? AND c.resume_uuid = ?")) {
-                for (Map.Entry<ContactType, String> entry : r.getContacts().entrySet()) {
-                    ps.setString(1, entry.getValue());
-                    ps.setString(2, entry.getKey().name());
-                    ps.setString(3, r.getUuid());
-                    ps.addBatch();
-                }
-                ps.executeBatch();
-            }
+            deleteContacts(connection, r);
+            insertContacts(connection, r);
             return null;
         });
     }
@@ -88,11 +68,11 @@ public class SqlStorage implements Storage {
                     if (!rs.next()) {
                         throw new NotExistStorageException(uuid);
                     }
-                    Resume r = new Resume(uuid, rs.getString("full_name"));
+                    Resume resume = new Resume(uuid, rs.getString("full_name"));
                     do {
-                        addContactToResume(r, rs);
+                        addContactToResume(rs, resume);
                     } while (rs.next());
-                    return r;
+                    return resume;
                 });
     }
 
@@ -110,21 +90,20 @@ public class SqlStorage implements Storage {
 
     @Override
     public List<Resume> getAllSorted() {
-        return sqlHelper.scrollableExecuteStatement("SELECT * FROM resume r LEFT JOIN contact c on r.uuid = c.resume_uuid ORDER BY r.full_name, r.uuid",
+        return sqlHelper.executeStatement("SELECT * FROM resume r LEFT JOIN contact c on r.uuid = c.resume_uuid ORDER BY r.full_name, r.uuid",
                 ps -> {
-                    List<Resume> list = new ArrayList<>();
+                    Map<String, Resume> map = new LinkedHashMap<>();
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         String uuid = rs.getString("uuid");
-                        String fullName = rs.getString("full_name");
-                        Resume r = new Resume(uuid, fullName);
-                        do {
-                            addContactToResume(r, rs);
-                        } while (rs.next() && uuid.equals(rs.getString("uuid")));
-                        list.add(r);
-                        rs.previous();
+                        Resume resume = map.get(uuid);
+                        if (resume == null) {
+                            resume = new Resume(uuid, rs.getString("full_name"));
+                            map.put(uuid, resume);
+                        }
+                        addContactToResume(rs, resume);
                     }
-                    return list;
+                    return new ArrayList<>(map.values());
                 });
     }
 
@@ -137,11 +116,31 @@ public class SqlStorage implements Storage {
                 });
     }
 
-    private void addContactToResume(Resume r, ResultSet rs) throws SQLException {
-        String strType = rs.getString("type");
+    private void insertContacts(Connection connection, Resume r) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement("INSERT INTO contact (resume_uuid, type, value) VALUES (?, ?, ?)")) {
+            for (Map.Entry<ContactType, String> entry : r.getContacts().entrySet()) {
+                ps.setString(1, r.getUuid());
+                ps.setString(2, entry.getKey().name());
+                ps.setString(3, entry.getValue());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        }
+    }
+
+    private void deleteContacts(Connection connection, Resume r) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement("DELETE FROM contact c WHERE c.resume_uuid = ?")) {
+            ps.setString(1, r.getUuid());
+            if (ps.executeUpdate() == 0) {
+                throw new NotExistStorageException(r.getUuid());
+            }
+        }
+    }
+
+    private void addContactToResume(ResultSet rs, Resume r) throws SQLException {
         String value = rs.getString("value");
-        if (strType != null && value != null) {
-            r.addContact(ContactType.valueOf(strType), value);
+        if (value != null) {
+            r.addContact(ContactType.valueOf(rs.getString("type")), value);
         }
     }
 }

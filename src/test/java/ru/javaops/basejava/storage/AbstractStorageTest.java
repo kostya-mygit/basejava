@@ -70,7 +70,10 @@ public abstract class AbstractStorageTest {
 
     @Test
     void update() {
-        Resume resume = ResumeTestData.createResume4(UUID_1, "New Full Name");
+        Resume resume = new Resume(UUID_1, "New Full Name");
+        resume.addContact(ContactType.PHONE, "41414");
+        resume.addContact(ContactType.SKYPE, "new skype");
+        resume.addContact(ContactType.EMAIL, "email4@gmail.com");
         storage.update(resume);
         assertEquals(List.of(RESUME_2, RESUME_3, resume), storage.getAllSorted());
     }
