@@ -5,4 +5,18 @@ VALUES ('a751ceb9-c3bf-44e9-a073-a0c130eee359', 'Anton A'),
 
 INSERT INTO contact (resume_uuid, type, value)
 VALUES ('a751ceb9-c3bf-44e9-a073-a0c130eee359', 'PHONE', '11111'),
-       ('a751ceb9-c3bf-44e9-a073-a0c130eee359', 'EMAIL', 'email1@mail.ru');
+       ('a751ceb9-c3bf-44e9-a073-a0c130eee359', 'EMAIL', 'email1@mail.ru'),
+       ('ba18773e-5b32-41c1-bfa7-9eb225495998', 'PHONE', '22222'),
+       ('ba18773e-5b32-41c1-bfa7-9eb225495998', 'EMAIL', 'email2@gmail.com'),
+       ('ba18773e-5b32-41c1-bfa7-9eb225495998', 'SKYPE', 'skype2');
+
+INSERT INTO section (resume_uuid, type, value)
+VALUES ('a751ceb9-c3bf-44e9-a073-a0c130eee359', 'PERSONAL', 'Personal'),
+       ('a751ceb9-c3bf-44e9-a073-a0c130eee359', 'OBJECTIVE', 'Objective'),
+       ('a751ceb9-c3bf-44e9-a073-a0c130eee359', 'ACHIEVEMENTS', 'Achievement1\nAchievement2'),
+       ('a751ceb9-c3bf-44e9-a073-a0c130eee359', 'QUALIFICATIONS', 'Qualification1\nQualification2'),
+       ('ba18773e-5b32-41c1-bfa7-9eb225495998', 'PERSONAL', 'Personal'),
+       ('ba18773e-5b32-41c1-bfa7-9eb225495998', 'OBJECTIVE', 'Objective'),
+       ('ba18773e-5b32-41c1-bfa7-9eb225495998', 'ACHIEVEMENTS', 'Achievement1\nAchievement2\nQualification3'),
+       ('ba18773e-5b32-41c1-bfa7-9eb225495998', 'QUALIFICATIONS', 'Qualification1\nQualification2\nQualification3');
+
