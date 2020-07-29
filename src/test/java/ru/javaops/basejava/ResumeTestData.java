@@ -8,6 +8,22 @@ import java.util.List;
 import java.util.Map;
 
 public class ResumeTestData {
+    public static final String UUID_1 = "a751ceb9-c3bf-44e9-a073-a0c130eee359";
+    public static final String UUID_2 = "ba18773e-5b32-41c1-bfa7-9eb225495998";
+    public static final String UUID_3 = "c04c0f94-6126-460a-85a2-840adc38866d";
+    public static final String UUID_4 = "df34b72f-07ec-4086-808d-abd2ce972955";
+
+    public static Resume RESUME_1;
+    public static Resume RESUME_2;
+    public static Resume RESUME_3;
+    public static Resume RESUME_4;
+
+    static {
+        RESUME_1 = createResume1(UUID_1, "Anton A");
+        RESUME_2 = createResume2(UUID_2, "Alex A");
+        RESUME_3 = createResume3(UUID_3, "Alex A");
+        RESUME_4 = createResume4(UUID_4, "Full Name");
+    }
 
     public static Resume createResume1(String uuid, String fullName) {
         Resume resume1 = new Resume(uuid, fullName);
