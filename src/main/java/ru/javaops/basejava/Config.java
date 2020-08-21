@@ -9,8 +9,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
+    private static final String PATH_PROPERTIES = getHomeDir() + "/config/resumes.properties";
     private static final Config INSTANCE = new Config();
-    private static final String PATH_PROPERTIES = "./config/resumes.properties";
     private final String storageDir;
     private final Storage storage;
 
@@ -35,5 +35,10 @@ public class Config {
 
     public Storage getStorage() {
         return storage;
+    }
+
+    private static String getHomeDir() {
+        String homeDir = System.getProperty("homeDir");
+        return homeDir == null ? "." : homeDir;
     }
 }

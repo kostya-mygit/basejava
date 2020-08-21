@@ -1,7 +1,7 @@
 package ru.javaops.basejava.web;
 
+import ru.javaops.basejava.Config;
 import ru.javaops.basejava.model.Resume;
-import ru.javaops.basejava.storage.SqlStorage;
 import ru.javaops.basejava.storage.Storage;
 
 import javax.servlet.ServletException;
@@ -12,6 +12,13 @@ import java.io.IOException;
 import java.util.List;
 
 public class ResumeServlet extends HttpServlet {
+    private Storage storage; // = Config.getInstance().getStorage();
+
+    @Override
+    public void init() throws ServletException {
+        storage = Config.getInstance().getStorage();
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -21,17 +28,13 @@ public class ResumeServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
-        String dbUrl = getServletContext().getInitParameter("dbUrl");
-        String dbUser = getServletContext().getInitParameter("dbUser");
-        String dbPassword = getServletContext().getInitParameter("dbPassword");
-        Storage storage = new SqlStorage(dbUrl, dbUser, dbPassword);
-
         String tableHeaders = "<table>\n" +
                 "  <tr>\n" +
                 "    <th>UUID</th>\n" +
                 "    <th>Full Name</th> \n" +
                 "  </tr>\n";
         StringBuilder sb = new StringBuilder(tableHeaders);
+
         List<Resume> resumes = storage.getAllSorted();
         for (Resume r : resumes) {
             sb.append("  <tr>\n" +
@@ -39,6 +42,7 @@ public class ResumeServlet extends HttpServlet {
                     "    <td>" + r.getFullName() + "</td>\n" +
                     "  </tr>\n");
         }
+
         sb.append("</table>");
 
         response.getWriter().write(sb.toString());
