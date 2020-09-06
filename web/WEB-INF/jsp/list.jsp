@@ -9,19 +9,33 @@
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<table>
-    <tr>
-        <th>Имя</th>
-        <th>Email</th>
-    </tr>
-    <c:forEach items="${resumes}" var="resume">
-        <jsp:useBean id="resume" class="ru.javaops.basejava.model.Resume"/>
+<section>
+    <table>
         <tr>
-            <td><a href=resumes?uuid=${resume.uuid}>${resume.fullName}</a></td>
-            <td>${resume.getContact(ContactType.EMAIL)}</td>
+            <th>Имя</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach var="resume" items="${resumes}">
+            <jsp:useBean id="resume" class="ru.javaops.basejava.model.Resume"/>
+            <tr>
+                <td>
+                    <a href="resume?uuid=${resume.uuid}&action=view">${resume.fullName}</a>
+                </td>
+                <td>
+                    <a href="mailto:${resume.getContact(ContactType.EMAIL)}">${resume.getContact(ContactType.EMAIL)}</a>
+                </td>
+                <td id="col3">
+                    <a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/pencil.png"></a>
+                </td>
+                <td id="col4">
+                    <a href="resume?uuid=${resume.uuid}&action=delete"><img src="img/delete.png"></a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</section>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

@@ -10,19 +10,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>resumeServlet</servlet-name>
-        <url-pattern>/resumes</url-pattern>
+        <url-pattern>/resume</url-pattern>
     </servlet-mapping>
 
-    <context-param>
-        <param-name>dbUrl</param-name>
-        <param-value>jdbc:postgresql://localhost:5432/resumes</param-value>
-    </context-param>
-    <context-param>
-        <param-name>dbUser</param-name>
-        <param-value>postgres</param-value>
-    </context-param>
-    <context-param>
-        <param-name>dbPassword</param-name>
-        <param-value>postgres</param-value>
-    </context-param>
 </web-app>

@@ -54,6 +54,7 @@ public class ResumeTestData {
         resume2.addContact(ContactType.EMAIL, "email2@gmail.com");
         resume2.addContact(ContactType.SKYPE, "skype2");
         resume2.addContact(ContactType.GITHUB, "https://github.com/github2");
+        resume2.addContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/22222");
         resume2.addContact(ContactType.HOME_PAGE, "https://homepage2.ru");
 
         resume2.addSection(SectionType.PERSONAL, new TextSection("Personal"));
