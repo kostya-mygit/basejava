@@ -155,9 +155,7 @@ public class SqlStorage implements Storage {
     private void deleteAttributes(Connection connection, Resume r, String sql) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, r.getUuid());
-            if (ps.executeUpdate() == 0) {
-                throw new NotExistStorageException(r.getUuid());
-            }
+            ps.execute();
         }
     }
 

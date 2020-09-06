@@ -10,6 +10,7 @@
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <section>
+    <p><a href="resume?action=add"><img src="img/add.png"></a></p>
     <table>
         <tr>
             <th>Имя</th>

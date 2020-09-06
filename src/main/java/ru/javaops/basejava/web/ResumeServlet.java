@@ -24,19 +24,21 @@ public class ResumeServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
+        String isNew = request.getParameter("isNew");
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
-        Resume r = storage.get(uuid);
-        r.setFullName(fullName);
-        for (ContactType type : ContactType.values()) {
-            String value = request.getParameter(type.name());
-            if (value != null && value.trim().length() != 0) {
-                r.addContact(type, value);
-            } else {
-                r.getContacts().remove(type);
-            }
+
+        Resume r;
+        if ("true".equals(isNew)) {
+            r = new Resume(uuid, fullName);
+            addContacts(request, r);
+            storage.save(r);
+        } else {
+            r = storage.get(uuid);
+            r.setFullName(fullName);
+            addContacts(request, r);
+            storage.update(r);
         }
-        storage.update(r);
         response.sendRedirect("resume");
     }
 
@@ -62,6 +64,10 @@ public class ResumeServlet extends HttpServlet {
             case "edit":
                 r = storage.get(uuid);
                 break;
+            case "add":
+                r = new Resume("New Name");
+                request.setAttribute("isNew", "true");
+                break;
             default:
                 throw new IllegalArgumentException("Action " + action + " is illegal");
         }
@@ -69,5 +75,16 @@ public class ResumeServlet extends HttpServlet {
         request.setAttribute("contactTypes", ContactType.values());
         request.getRequestDispatcher("view".equals(action) ? "/WEB-INF/jsp/view.jsp" : "/WEB-INF/jsp/edit.jsp")
                 .forward(request, response);
+    }
+
+    private void addContacts(HttpServletRequest request, Resume r) {
+        for (ContactType type : ContactType.values()) {
+            String value = request.getParameter(type.name());
+            if (value != null && value.trim().length() != 0) {
+                r.addContact(type, value);
+            } else {
+                r.getContacts().remove(type);
+            }
+        }
     }
 }
