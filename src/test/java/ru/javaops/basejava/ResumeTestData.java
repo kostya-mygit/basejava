@@ -63,10 +63,10 @@ public class ResumeTestData {
         resume2.addSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1", "Qualification2", "Qualification3", "Qualification4"));
 
         List<Organization> experience = new ArrayList<>();
-        experience.add(new Organization("Organization3", null, new Organization.Position(2018, Month.FEBRUARY, "Software Designer", "Description")));
+        experience.add(new Organization("Organization3", "https://organization3.com", new Organization.Position(2018, Month.FEBRUARY, "Software Designer", "Description")));
         experience.add(new Organization("Organization2", null, new Organization.Position(2015, Month.MARCH, 2018, Month.JANUARY, "Software Designer", "Description")));
-        experience.add(new Organization("Organization1", null, new Organization.Position(2010, Month.JUNE, 2015, Month.FEBRUARY, "Software Designer", "Description")));
-        experience.add(new Organization("Organization1", null, new Organization.Position(2005, Month.SEPTEMBER, 2010, Month.MAY, "QA Automation Engineer", "Description")));
+        experience.add(new Organization("Organization1", null, new Organization.Position(2010, Month.JUNE, 2015, Month.FEBRUARY, "Software Designer", "Description"),
+                new Organization.Position(2005, Month.SEPTEMBER, 2010, Month.MAY, "QA Automation Engineer", "Description")));
         resume2.addSection(SectionType.EXPERIENCE, new OrganizationsSection(experience));
 
         List<Organization> education = new ArrayList<>();
@@ -89,7 +89,7 @@ public class ResumeTestData {
         resume3.addSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1"));
 
         List<Organization> experience = new ArrayList<>();
-        experience.add(new Organization("Organization1", null, new Organization.Position(2018, Month.SEPTEMBER, "QA Automation Engineer", "Description")));
+        experience.add(new Organization("Organization1", "https://organization1.ru", new Organization.Position(2018, Month.SEPTEMBER, "QA Automation Engineer", "Description")));
         resume3.addSection(SectionType.EXPERIENCE, new OrganizationsSection(experience));
 
         List<Organization> education = new ArrayList<>();

@@ -20,7 +20,7 @@ th, td {
 }
 
 th {
-    background-color: lightgreen;
+    background-color: palegreen;
 }
 
 tr:nth-child(even) {
@@ -49,20 +49,14 @@ dd {
     vertical-align: top;
 }
 
-
-header {
+header, footer {
     background: none repeat scroll 0 0 lightskyblue;
-    color: lightskyblue;
+    color: skyblue;
     font-size: 20px;
     padding: 5px 20px;
     text-align: center;
 }
 
-footer {
-    background: none repeat scroll 0 0 lightskyblue;
-    color: lightskyblue;
-    font-size: 20px;
-    padding: 5px 20px;
-    margin: 20px 0;
-    text-align: center;
+img {
+    height: 18px;
 }
