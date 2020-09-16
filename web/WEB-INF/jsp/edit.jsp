@@ -14,97 +14,130 @@
 <jsp:include page="fragments/header.jsp"/>
 <section>
     <form method="post" action="resume" enctype="application/x-www-form-urlencoded">
-        <input type="hidden" name="uuid" value="${resume.uuid}">
-        <dl>
-            <dt>Имя</dt>
-            <dd><input type="text" name="fullName" value="${resume.fullName}" size="75" required></dd>
-        </dl>
-        <br>
-        <dl>
+
+        <div class="container">
+            <input type="hidden" name="uuid" value="${resume.uuid}">
+            <div class="row">
+                <div class="col-25">
+                    <label>Имя</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="fullName" value="${resume.fullName}" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
             <c:forEach var="contactType" items="${contactTypes}">
                 <jsp:useBean id="contactType" type="ru.javaops.basejava.model.ContactType"/>
-                <dt>${contactType.title}</dt>
-                <c:choose>
-                    <c:when test="${contactType == ContactType.EMAIL}">
-                        <dd><input type="email" name="${contactType}" value="${resume.getContact(contactType)}"
-                                   size="75" required></dd>
-                    </c:when>
-                    <c:otherwise>
-                        <dd><input type="text" name="${contactType}" value="${resume.getContact(contactType)}"
-                                   size="75"></dd>
-                    </c:otherwise>
-                </c:choose>
+                <div class="row">
+                    <div class="col-25">
+                        <label>${contactType.title}</label>
+                    </div>
+                    <div class="col-75">
+                        <c:choose>
+                            <c:when test="${contactType == ContactType.EMAIL}">
+                                <input type="email" name="${contactType}" value="${resume.getContact(contactType)}"
+                                       required>
+                            </c:when>
+                            <c:otherwise>
+                                <input type="text" name="${contactType}" value="${resume.getContact(contactType)}">
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
             </c:forEach>
-        </dl>
-        <br>
-        <dl>
+        </div>
+
+        <div class="container">
             <c:forEach var="sectionType" items="${sectionTypes}">
                 <jsp:useBean id="sectionType" type="ru.javaops.basejava.model.SectionType"/>
-                <h3>
-                    <dt>${sectionType.title}</dt>
-                </h3>
-                <br>
+                <label>${sectionType.title}</label>
                 <c:choose>
                     <c:when test="${sectionType == SectionType.OBJECTIVE || sectionType == SectionType.PERSONAL}">
-                        <dd><input type="text" name="${sectionType}" value="${resume.getSection(sectionType).content}"
-                                   size="140"></dd>
+                        <input type="text" name="${sectionType}"
+                               value="${resume.getSection(sectionType).content}">
                     </c:when>
                     <c:when test="${sectionType == SectionType.ACHIEVEMENTS || sectionType == SectionType.QUALIFICATIONS}">
                         <jsp:useBean id="htmlUtil" type="ru.javaops.basejava.util.HtmlUtil"
                                      class="ru.javaops.basejava.util.HtmlUtil"/>
-                        <dd><textarea name="${sectionType}" cols="130"
-                                      rows="5">${htmlUtil.formatListToString(resume.getSection(sectionType).items)}</textarea>
-                        </dd>
+                        <textarea
+                                name="${sectionType}">${htmlUtil.formatListToString(resume.getSection(sectionType).items)}</textarea>
                     </c:when>
                     <c:when test="${sectionType == SectionType.EXPERIENCE || sectionType == SectionType.EDUCATION}">
                         <c:forEach var="organization" items="${resume.getSection(sectionType).organizations}"
                                    varStatus="counter">
                             <jsp:useBean id="organization" type="ru.javaops.basejava.model.Organization"/>
-                            <dl>
-                                <dt>Название учреждения:</dt>
-                                <dd><input type="text" name="${sectionType}"
-                                           value="${organization.homePage.name}" size="100"/></dd>
-                            </dl>
-                            <dl>
-                                <dt>Сайт учреждения:</dt>
-                                <dd><input type="text" name="${sectionType}url"
-                                           value="${organization.homePage.url}" size="100"/></dd>
-                            </dl>
-                            <c:forEach var="position" items="${organization.positions}">
-                                <jsp:useBean id="position" type="ru.javaops.basejava.model.Organization.Position"/>
-                                <div>
-                                    <dl>
-                                        <dt>Начальная дата:</dt>
-                                        <dd><input type="text" name="${sectionType}${counter.index}startDate"
-                                                   value="${htmlUtil.formatDateToMMyyyy(position.startDate)}"
-                                                   placeholder="MM/yyyy" size="20"/></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Конечная дата:</dt>
-                                        <dd><input type="text" name="${sectionType}${counter.index}endDate"
-                                                   value="${htmlUtil.formatDateToMMyyyy(position.endDate)}"
-                                                   placeholder="MM/yyyy" size="20"/></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Должность:</dt>
-                                        <dd><input type="text" name="${sectionType}${counter.index}title"
-                                                   value="${position.title}" size=100></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Описание:</dt>
-                                        <dd><input type="text" name="${sectionType}${counter.index}description"
-                                                   value="${position.description}" size="100"/></dd>
-                                    </dl>
+                            <div class="container2">
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label class="font-normal">Название учреждения</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" name="${sectionType}" value="${organization.homePage.name}">
+                                    </div>
                                 </div>
-                            </c:forEach>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label class="font-normal">Сайт учреждения</label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" name="${sectionType}url"
+                                               value="${organization.homePage.url}">
+                                    </div>
+                                </div>
+                                <c:forEach var="position" items="${organization.positions}">
+                                    <jsp:useBean id="position"
+                                                 type="ru.javaops.basejava.model.Organization.Position"/>
+                                    <div class="container3">
+                                        <div class="row">
+                                            <div class="col-25-right">
+                                                <label class="font-normal">Начальная дата</label>
+                                            </div>
+                                            <div class="col-25">
+                                                <input type="text" name="${sectionType}${counter.index}startDate"
+                                                       value="${htmlUtil.formatDateToMMyyyy(position.startDate)}"
+                                                       placeholder="MM/yyyy">
+                                            </div>
+                                            <div class="col-25-right">
+                                                <label class="font-normal">Конечная дата</label>
+                                            </div>
+                                            <div class="col-25">
+                                                <input type="text" name="${sectionType}${counter.index}endDate"
+                                                       value="${htmlUtil.formatDateToMMyyyy(position.endDate)}"
+                                                       placeholder="MM/yyyy">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-25-right">
+                                                <label class="font-normal">Должность</label>
+                                            </div>
+                                            <div class="col-75">
+                                                <input type="text" name="${sectionType}${counter.index}title"
+                                                       value="${position.title}">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-25-right">
+                                                <label class="font-normal">Описание</label>
+                                            </div>
+                                            <div class="col-75">
+                                                <input type="text" name="${sectionType}${counter.index}description"
+                                                       value="${position.description}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </c:forEach>
                     </c:when>
                 </c:choose>
             </c:forEach>
-        </dl>
-        <br>
-        <button type="submit">Сохранить</button>
-        <button onclick="window.history.back()">Отменить</button>
+        </div>
+        <div class="row">
+            <input type="submit" id="submit" value="Сохранить">
+            <input type="button" id="cancel" value="Отменить" onclick="window.history.back()">
+        </div>
     </form>
 </section>
 <jsp:include page="fragments/footer.jsp"/>
