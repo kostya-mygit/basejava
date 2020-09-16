@@ -12,7 +12,7 @@
 <section>
     <a href="resume?action=add"><img src="img/add.png"></a>
     <p>
-    <table>
+    <table id="allResumes">
         <tr>
             <th>Имя</th>
             <th>Email</th>

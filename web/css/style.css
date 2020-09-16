@@ -4,26 +4,26 @@ section {
 }
 
 h2, h3 {
-    margin: 15px 0 5px;
+    padding: 5px 0 5px 0;
 }
 
-table {
+table#allResumes {
     border: 1px solid black;
     border-collapse: collapse;
     width: 100%;
 }
 
-th, td {
+table#allResumes th, td {
     border: 1px solid black;
     padding: 8px;
     text-align: left;
 }
 
-th {
+table#allResumes th {
     background-color: palegreen;
 }
 
-tr:nth-child(even) {
+table#allResumes tr:nth-child(even) {
     background-color: #f2f2f2
 }
 
@@ -32,9 +32,8 @@ tr:nth-child(even) {
 }
 
 dl {
-    background: none repeat scroll 0 0 #FAFAFA;
+    background: none repeat scroll 0 0 #f2f2f2;
     margin: 8px 0;
-    padding: 0;
 }
 
 dt {
@@ -49,6 +48,11 @@ dd {
     vertical-align: top;
 }
 
+div {
+    margin-left: 30px;
+    padding: 2px 0;
+}
+
 header, footer {
     background: none repeat scroll 0 0 lightskyblue;
     color: skyblue;
@@ -59,4 +63,24 @@ header, footer {
 
 img {
     height: 18px;
+}
+
+a[href^="skype:"] {
+    padding-left: 20px !important;
+    background: url(../img/skype.png) no-repeat center left;
+}
+
+a[href^="mailto:"] {
+    padding-left: 20px !important;
+    background: url(../img/email.png) no-repeat center left;
+}
+
+a[href^="https://stackoverflow.com"] {
+    padding-left: 20px !important;
+    background: url(../img/so.png) no-repeat center left;
+}
+
+a[href*="github."] {
+    padding-left: 20px !important;
+    background: url(../img/gh.png) no-repeat center left;
 }

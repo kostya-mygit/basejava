@@ -16,23 +16,23 @@ public class DataStreamSerializer implements Serializer {
             String fullName = dis.readUTF();
             Resume resume = new Resume(uuid, fullName);
             //read contacts
-            readItems(dis, () -> resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF()));
+            readItems(dis, () -> resume.setContact(ContactType.valueOf(dis.readUTF()), dis.readUTF()));
             //read sections
             readItems(dis, () -> {
                 SectionType sectionType = SectionType.valueOf(dis.readUTF());
                 switch (sectionType) {
                     case PERSONAL:
                     case OBJECTIVE: {
-                        resume.addSection(sectionType, new TextSection(dis.readUTF()));
+                        resume.setSection(sectionType, new TextSection(dis.readUTF()));
                         break;
                     }
                     case ACHIEVEMENTS:
                     case QUALIFICATIONS:
-                        resume.addSection(sectionType, new ListSection(readList(dis, dis::readUTF)));
+                        resume.setSection(sectionType, new ListSection(readList(dis, dis::readUTF)));
                         break;
                     case EXPERIENCE:
                     case EDUCATION:
-                        resume.addSection(sectionType, new OrganizationsSection(readList(dis, () ->
+                        resume.setSection(sectionType, new OrganizationsSection(readList(dis, () ->
                                 new Organization(new Link(dis.readUTF(), dis.readUTF()), readList(dis, () ->
                                         new Organization.Position(readLocalDate(dis), readLocalDate(dis), dis.readUTF(), dis.readUTF()))))));
                         break;

@@ -30,6 +30,7 @@ public abstract class AbstractStorageTest {
         storage.save(RESUME_1);
         storage.save(RESUME_2);
         storage.save(RESUME_3);
+        storage.save(RESUME_5);
     }
 
     @Test
@@ -54,9 +55,9 @@ public abstract class AbstractStorageTest {
     @Test
     void update() {
         Resume resume = new Resume(UUID_1, "New Full Name");
-        resume.addContact(ContactType.PHONE, "41414");
-        resume.addContact(ContactType.SKYPE, "new skype");
-        resume.addContact(ContactType.EMAIL, "email4@gmail.com");
+        resume.setContact(ContactType.PHONE, "41414");
+        resume.setContact(ContactType.SKYPE, "new skype");
+        resume.setContact(ContactType.EMAIL, "email4@gmail.com");
         storage.update(resume);
         assertEquals(List.of(RESUME_2, RESUME_3, resume), storage.getAllSorted());
     }

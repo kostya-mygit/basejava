@@ -3,15 +3,17 @@ package ru.javaops.basejava.web;
 import ru.javaops.basejava.Config;
 import ru.javaops.basejava.model.*;
 import ru.javaops.basejava.storage.Storage;
+import ru.javaops.basejava.util.DateUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ru.javaops.basejava.util.HtmlUtil.isEmpty;
 
 public class ResumeServlet extends HttpServlet {
     private Storage storage; // = Config.getInstance().getStorage();
@@ -26,13 +28,13 @@ public class ResumeServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
-        String isNew = request.getParameter("isNew");
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
 
+        final boolean isNew = (uuid == null || uuid.length() == 0);
         Resume r;
-        if ("true".equals(isNew)) {
-            r = new Resume(uuid, fullName);
+        if (isNew) {
+            r = new Resume(fullName);
             addContacts(request, r);
             addSections(request, r);
             storage.save(r);
@@ -43,6 +45,7 @@ public class ResumeServlet extends HttpServlet {
             addSections(request, r);
             storage.update(r);
         }
+
         response.sendRedirect("resume");
     }
 
@@ -65,12 +68,46 @@ public class ResumeServlet extends HttpServlet {
                 response.sendRedirect("resume");
                 return;
             case "view":
-            case "edit":
                 r = storage.get(uuid);
                 break;
             case "add":
-                r = new Resume("New Name");
-                request.setAttribute("isNew", "true");
+                r = Resume.EMPTY;
+                break;
+            case "edit":
+                r = storage.get(uuid);
+                for (SectionType sectionType : SectionType.values()) {
+                    Section section = r.getSection(sectionType);
+                    switch (sectionType) {
+                        case PERSONAL:
+                        case OBJECTIVE:
+                            if (section == null) {
+                                section = TextSection.EMPTY;
+                            }
+                            break;
+                        case ACHIEVEMENTS:
+                        case QUALIFICATIONS:
+                            if (section == null) {
+                                section = ListSection.EMPTY;
+                            }
+                            break;
+                        case EXPERIENCE:
+                        case EDUCATION:
+                            OrganizationsSection organizationsSection = (OrganizationsSection) section;
+                            List<Organization> emptyFirstOrganizations = new ArrayList<>();
+                            emptyFirstOrganizations.add(Organization.EMPTY);
+                            if (organizationsSection != null) {
+                                for (Organization organization : organizationsSection.getOrganizations()) {
+                                    List<Organization.Position> emptyFirstPositions = new ArrayList<>();
+                                    emptyFirstPositions.add(Organization.Position.EMPTY);
+                                    emptyFirstPositions.addAll(organization.getPositions());
+                                    emptyFirstOrganizations.add(new Organization(organization.getHomePage(), emptyFirstPositions));
+                                }
+                            }
+                            section = new OrganizationsSection(emptyFirstOrganizations);
+                            break;
+                    }
+                    r.setSection(sectionType, section);
+                }
                 break;
             default:
                 throw new IllegalArgumentException("Action " + action + " is illegal");
@@ -85,70 +122,55 @@ public class ResumeServlet extends HttpServlet {
     private void addContacts(HttpServletRequest request, Resume r) {
         for (ContactType contactType : ContactType.values()) {
             String value = request.getParameter(contactType.name());
-            if (isNotEmpty(value)) {
-                r.addContact(contactType, value);
-            } else {
+            if (isEmpty(value)) {
                 r.getContacts().remove(contactType);
+            } else {
+                r.setContact(contactType, value);
             }
         }
     }
 
     private void addSections(HttpServletRequest request, Resume r) {
         for (SectionType sectionType : SectionType.values()) {
-            switch (sectionType) {
-                case PERSONAL:
-                case OBJECTIVE:
-                    String content = request.getParameter(sectionType.name());
-                    if (isNotEmpty(content)) {
-                        r.addSection(sectionType, new TextSection(content));
-                    } else {
-                        r.getSections().remove(sectionType);
-                    }
-                    break;
-                case ACHIEVEMENTS:
-                case QUALIFICATIONS:
-                    List<String> items = new ArrayList<>();
-                    String[] itemsArr = request.getParameterValues(sectionType.name());
-                    for (String item : itemsArr) {
-                        if (isNotEmpty(item)) {
-                            items.add(item);
+            String value = request.getParameter(sectionType.name());
+            final String[] values = request.getParameterValues(sectionType.name());
+            if (isEmpty(value) && values.length < 2) {
+                r.getSections().remove(sectionType);
+            } else {
+                switch (sectionType) {
+                    case PERSONAL:
+                    case OBJECTIVE:
+                        r.setSection(sectionType, new TextSection(value));
+                        break;
+                    case ACHIEVEMENTS:
+                    case QUALIFICATIONS:
+                        r.setSection(sectionType, new ListSection(value.split("\\n")));
+                        break;
+                    case EXPERIENCE:
+                    case EDUCATION:
+                        List<Organization> organizations = new ArrayList<>();
+                        String[] urls = request.getParameterValues(sectionType.name() + "url");
+                        for (int i = 0; i < values.length; i++) {
+                            String name = values[i];
+                            if (!isEmpty(name)) {
+                                List<Organization.Position> positions = new ArrayList<>();
+                                String strCountIndex = sectionType.name() + i;
+                                String[] startDates = request.getParameterValues(strCountIndex + "startDate");
+                                String[] endDates = request.getParameterValues(strCountIndex + "endDate");
+                                String[] titles = request.getParameterValues(strCountIndex + "title");
+                                String[] descriptions = request.getParameterValues(strCountIndex + "description");
+                                for (int j = 0; j < titles.length; j++) {
+                                    if (!isEmpty(titles[j])) {
+                                        positions.add(new Organization.Position(DateUtil.parse(startDates[j]), DateUtil.parse(endDates[j]), titles[j], descriptions[j]));
+                                    }
+                                }
+                                organizations.add(new Organization(new Link(name, urls[i]), positions));
+                            }
                         }
-                    }
-                    if (items.size() != 0) {
-                        r.addSection(sectionType, new ListSection(items));
-                    } else {
-                        r.getSections().remove(sectionType);
-                    }
-                    break;
-                case EXPERIENCE:
-                case EDUCATION:
-                    List<Organization> organizations = new ArrayList<>();
-                    String[] organizationsArr = request.getParameterValues(sectionType.name());
-                    for (int i = 0; i < organizationsArr.length; i += 6) {
-                        String name = organizationsArr[i];
-                        String url = organizationsArr[i + 1];
-                        String startDate = organizationsArr[i + 2];
-                        String endDate = organizationsArr[i + 3];
-                        String title = organizationsArr[i + 4];
-                        String description = organizationsArr[i + 5];
-                        if (isNotEmpty(name) && isNotEmpty(startDate) && isNotEmpty(endDate) && isNotEmpty(title)) {
-                            organizations.add(new Organization(name, url,
-                                    new Organization.Position(LocalDate.parse(startDate), LocalDate.parse(endDate), title, description)));
-                        }
-                    }
-                    if (organizations.size() != 0) {
-                        r.addSection(sectionType, new OrganizationsSection(organizations));
-                    } else {
-                        r.getSections().remove(sectionType);
-                    }
-                    break;
+                        r.setSection(sectionType, new OrganizationsSection(organizations));
+                        break;
+                }
             }
         }
     }
-
-    private boolean isNotEmpty(String value) {
-        return value != null && value.trim().length() != 0;
-    }
-
-
 }
