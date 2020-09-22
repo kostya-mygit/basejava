@@ -14,8 +14,7 @@
 <jsp:include page="fragments/header.jsp"/>
 <section>
     <form method="post" action="resume" enctype="application/x-www-form-urlencoded">
-
-        <div class="container">
+        <div class="container-edit">
             <input type="hidden" name="uuid" value="${resume.uuid}">
             <div class="row">
                 <div class="col-25">
@@ -27,7 +26,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container-edit">
             <c:forEach var="contactType" items="${contactTypes}">
                 <jsp:useBean id="contactType" type="ru.javaops.basejava.model.ContactType"/>
                 <div class="row">
@@ -36,6 +35,10 @@
                     </div>
                     <div class="col-75">
                         <c:choose>
+                            <c:when test="${contactType == ContactType.PHONE}">
+                                <input type="tel" name="${contactType}" value="${resume.getContact(contactType)}"
+                                       placeholder="900123456" pattern="[0-9]{10}">
+                            </c:when>
                             <c:when test="${contactType == ContactType.EMAIL}">
                                 <input type="email" name="${contactType}" value="${resume.getContact(contactType)}"
                                        required>
@@ -49,9 +52,9 @@
             </c:forEach>
         </div>
 
-        <div class="container">
-            <c:forEach var="sectionType" items="${sectionTypes}">
-                <jsp:useBean id="sectionType" type="ru.javaops.basejava.model.SectionType"/>
+        <c:forEach var="sectionType" items="${sectionTypes}">
+            <jsp:useBean id="sectionType" type="ru.javaops.basejava.model.SectionType"/>
+            <div class="container-edit">
                 <label>${sectionType.title}</label>
                 <c:choose>
                     <c:when test="${sectionType == SectionType.OBJECTIVE || sectionType == SectionType.PERSONAL}">
@@ -68,7 +71,7 @@
                         <c:forEach var="organization" items="${resume.getSection(sectionType).organizations}"
                                    varStatus="counter">
                             <jsp:useBean id="organization" type="ru.javaops.basejava.model.Organization"/>
-                            <div class="container2">
+                            <div class="container-edit-2">
                                 <div class="row">
                                     <div class="col-25">
                                         <label class="font-normal">Название учреждения</label>
@@ -86,10 +89,10 @@
                                                value="${organization.homePage.url}">
                                     </div>
                                 </div>
-                                <c:forEach var="position" items="${organization.positions}">
+                                <c:forEach var="position" items="${organization.positions}" varStatus="status">
                                     <jsp:useBean id="position"
                                                  type="ru.javaops.basejava.model.Organization.Position"/>
-                                    <div class="container3">
+                                    <div ${status.last ? 'class="container-edit-4"' : 'class="container-edit-3"'}>
                                         <div class="row">
                                             <div class="col-25-right">
                                                 <label class="font-normal">Начальная дата</label>
@@ -132,8 +135,9 @@
                         </c:forEach>
                     </c:when>
                 </c:choose>
-            </c:forEach>
-        </div>
+            </div>
+        </c:forEach>
+
         <div class="row">
             <input type="submit" id="submit" value="Сохранить">
             <input type="button" id="cancel" value="Отменить" onclick="window.history.back()">

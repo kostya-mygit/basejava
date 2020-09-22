@@ -27,7 +27,7 @@ table#allResumes tr:nth-child(even) {
     text-align: center;
 }
 
-input[type=text], input[type=email], textarea {
+input[type=text], input[type=tel], input[type=email], textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -68,29 +68,61 @@ input[type=button], input[type=submit] {
     background-color: #E04035;
 }
 
+#ok {
+    background-color: #4CAF50;
+    width: 100%;
+}
+
+#ok:hover {
+    background-color: #45a049;
+}
+
 label {
     font-weight: bold;
-    padding: 10px 10px 10px 0;
+    padding: 5px 10px 10px 0;
     display: inline-block;
 }
 
-.container {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 10px 20px;
-    margin: 15px 0;
+ul {
+    list-style-position: outside;
 }
 
-.container2 {
+.container-edit {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 10px 20px 15px 20px;
+    margin: 20px 0;
+}
+
+.container-edit-2 {
     border-radius: 5px;
     background-color: #f2f2f2;
     margin-left: 30px;
 }
 
-.container3 {
+.container-edit-3 {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px 0;
+}
+
+.container-edit-4 {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding-top: 20px;
+}
+
+.container-view {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 5px 20px;
+    margin: 20px 0;
+}
+
+.container-view-2 {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    margin-left: 25px;
 }
 
 /* Clear floats after the columns */

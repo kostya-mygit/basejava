@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <section>
-    <a href="resume?action=add"><img src="img/add.png"></a>
+    <p><a href="resume?action=add"><img src="img/add.png"></a></p>
     <p>
     <table id="allResumes">
         <tr>
@@ -37,6 +37,7 @@
             </tr>
         </c:forEach>
     </table>
+    </p>
 </section>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
