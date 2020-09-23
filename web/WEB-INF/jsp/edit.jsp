@@ -89,10 +89,10 @@
                                                value="${organization.homePage.url}">
                                     </div>
                                 </div>
-                                <c:forEach var="position" items="${organization.positions}" varStatus="status">
+                                <c:forEach var="position" items="${organization.positions}">
                                     <jsp:useBean id="position"
                                                  type="ru.javaops.basejava.model.Organization.Position"/>
-                                    <div ${status.last ? 'class="container-edit-4"' : 'class="container-edit-3"'}>
+                                    <div class="container-edit-3">
                                         <div class="row">
                                             <div class="col-25-right">
                                                 <label class="font-normal">Начальная дата</label>
