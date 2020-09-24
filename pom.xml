@@ -6,11 +6,12 @@
 
     <groupId>ru.javaops</groupId>
     <artifactId>basejava</artifactId>
+    <packaging>war</packaging>
+
     <version>1.0-SNAPSHOT</version>
 
-    <name>basejava</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <name>Resumes</name>
+    <url>https://kostya-mybasejava.herokuapp.com</url>
 
     <properties>
         <java.version>11</java.version>
@@ -66,7 +67,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- servlet-api -->
+        <!-- web -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -74,11 +75,10 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- taglibs-standard-impl -->
         <dependency>
-            <groupId>org.apache.taglibs</groupId>
-            <artifactId>taglibs-standard-impl</artifactId>
-            <version>1.2.5</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
 
     </dependencies>

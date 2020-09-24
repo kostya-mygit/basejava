@@ -3,19 +3,18 @@ package ru.javaops.basejava;
 import ru.javaops.basejava.storage.SqlStorage;
 import ru.javaops.basejava.storage.Storage;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
-    private static final String PATH_PROPERTIES = getHomeDir() + "/config/resumes.properties";
+    private static final String PATH_PROPERTIES = "/resumes.properties";
     private static final Config INSTANCE = new Config();
     private final String storageDir;
     private final Storage storage;
 
     private Config() {
-        try (InputStream is = new FileInputStream(PATH_PROPERTIES)) {
+        try (InputStream is = Config.class.getResourceAsStream(PATH_PROPERTIES)) {
             Properties properties = new Properties();
             properties.load(is);
             storageDir = properties.getProperty("storage.dir");
@@ -35,10 +34,5 @@ public class Config {
 
     public Storage getStorage() {
         return storage;
-    }
-
-    private static String getHomeDir() {
-        String homeDir = System.getProperty("homeDir");
-        return homeDir == null ? "." : homeDir;
     }
 }
