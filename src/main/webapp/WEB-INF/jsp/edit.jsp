@@ -37,7 +37,7 @@
                         <c:choose>
                             <c:when test="${contactType == ContactType.PHONE}">
                                 <input type="tel" name="${contactType}" value="${resume.getContact(contactType)}"
-                                       placeholder="900123456" pattern="[0-9]{10}">
+                                       placeholder="9001234567" pattern="[0-9]{10}">
                             </c:when>
                             <c:when test="${contactType == ContactType.EMAIL}">
                                 <input type="email" name="${contactType}" value="${resume.getContact(contactType)}"
@@ -58,8 +58,8 @@
                 <label>${sectionType.title}</label>
                 <c:choose>
                     <c:when test="${sectionType == SectionType.OBJECTIVE || sectionType == SectionType.PERSONAL}">
-                        <input type="text" name="${sectionType}"
-                               value="${resume.getSection(sectionType).content}">
+                        <textarea class="input-textarea1"
+                                name="${sectionType}">${resume.getSection(sectionType).content}</textarea>
                     </c:when>
                     <c:when test="${sectionType == SectionType.ACHIEVEMENTS || sectionType == SectionType.QUALIFICATIONS}">
                         <jsp:useBean id="htmlUtil" type="ru.javaops.basejava.util.HtmlUtil"
@@ -77,7 +77,8 @@
                                         <label class="font-normal">Название учреждения</label>
                                     </div>
                                     <div class="col-75">
-                                        <input type="text" name="${sectionType}" value="${organization.homePage.name}">
+                                        <textarea class="input-textarea1"
+                                                  name="${sectionType}">${organization.homePage.name}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -125,8 +126,8 @@
                                                 <label class="font-normal">Описание</label>
                                             </div>
                                             <div class="col-75">
-                                                <input type="text" name="${sectionType}${counter.index}description"
-                                                       value="${position.description}">
+                                                <textarea class="input-textarea2"
+                                                          name="${sectionType}${counter.index}description">${position.description}</textarea>
                                             </div>
                                         </div>
                                     </div>

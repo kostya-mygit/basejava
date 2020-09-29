@@ -5,7 +5,7 @@
     <contacts>
         <entry>
             <key>PHONE</key>
-            <value>22222</value>
+            <value>9002222222</value>
         </entry>
         <entry>
             <key>SKYPE</key>
@@ -20,21 +20,25 @@
             <value>https://github.com/github2</value>
         </entry>
         <entry>
+            <key>STACKOVERFLOW</key>
+            <value>https://stackoverflow.com/users/22222</value>
+        </entry>
+        <entry>
             <key>HOME_PAGE</key>
             <value>https://homepage2.ru</value>
         </entry>
     </contacts>
     <sections>
         <entry>
-            <key>PERSONAL</key>
-            <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <content>Personal</content>
-            </value>
-        </entry>
-        <entry>
             <key>OBJECTIVE</key>
             <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <content>Objective</content>
+            </value>
+        </entry>
+        <entry>
+            <key>PERSONAL</key>
+            <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <content>Personal</content>
             </value>
         </entry>
         <entry>
@@ -61,7 +65,7 @@
                 <organizations>
                     <homePage>
                         <name>Organization3</name>
-                        <url></url>
+                        <url>https://organization3.com</url>
                     </homePage>
                     <positions>
                         <startDate>2018-02-01</startDate>
@@ -93,12 +97,6 @@
                         <title>Software Designer</title>
                         <description>Description</description>
                     </positions>
-                </organizations>
-                <organizations>
-                    <homePage>
-                        <name>Organization1</name>
-                        <url></url>
-                    </homePage>
                     <positions>
                         <startDate>2005-09-01</startDate>
                         <endDate>2010-05-01</endDate>

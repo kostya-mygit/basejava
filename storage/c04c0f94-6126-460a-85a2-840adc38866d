@@ -5,7 +5,7 @@
     <contacts>
         <entry>
             <key>PHONE</key>
-            <value>33333</value>
+            <value>9003333333</value>
         </entry>
         <entry>
             <key>EMAIL</key>
@@ -14,15 +14,15 @@
     </contacts>
     <sections>
         <entry>
-            <key>PERSONAL</key>
-            <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <content>Personal</content>
-            </value>
-        </entry>
-        <entry>
             <key>OBJECTIVE</key>
             <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <content>Objective</content>
+            </value>
+        </entry>
+        <entry>
+            <key>PERSONAL</key>
+            <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <content>Personal</content>
             </value>
         </entry>
         <entry>
@@ -43,7 +43,7 @@
                 <organizations>
                     <homePage>
                         <name>Organization1</name>
-                        <url></url>
+                        <url>https://organization1.ru</url>
                     </homePage>
                     <positions>
                         <startDate>2018-09-01</startDate>

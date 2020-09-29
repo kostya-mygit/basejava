@@ -1,11 +1,11 @@
 package ru.javaops.basejava;
 
 import ru.javaops.basejava.model.*;
+import ru.javaops.basejava.storage.Storage;
 
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ResumeTestData {
     public static final String UUID_1 = "a751ceb9-c3bf-44e9-a073-a0c130eee359";
@@ -21,31 +21,35 @@ public class ResumeTestData {
     public static Resume RESUME_5;
 
     static {
-        RESUME_1 = createResume1(UUID_1, "Anton A");
-        RESUME_2 = createResume2(UUID_2, "Alex A");
-        RESUME_3 = createResume3(UUID_3, "Alex A");
-        RESUME_4 = createResume4(UUID_4, "Full Name");
+        RESUME_1 = createResume1(UUID_1, "Александр Алешин");
+        RESUME_2 = createResume2(UUID_2, "Алексей Антонов");
+        RESUME_3 = createResume3(UUID_3, "Алексей Антонов");
+        RESUME_4 = createResume4(UUID_4, "Антон Андреев");
         RESUME_5 = createGK(UUID_5, "Григорий Кислин");
     }
 
     public static Resume createResume1(String uuid, String fullName) {
         Resume resume1 = new Resume(uuid, fullName);
 
-        resume1.setContact(ContactType.PHONE, "11111");
+        resume1.setContact(ContactType.PHONE, "9001111111");
         resume1.setContact(ContactType.EMAIL, "email1@mail.ru");
+        resume1.setContact(ContactType.SKYPE, "skype1");
+        resume1.setContact(ContactType.GITHUB, "https://github.com/github1");
 
-        resume1.setSection(SectionType.PERSONAL, new TextSection("Personal"));
-        resume1.setSection(SectionType.OBJECTIVE, new TextSection("Objective"));
-        resume1.setSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1", "Achievement2"));
-        resume1.setSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1", "Qualification2"));
+        resume1.setSection(SectionType.PERSONAL, new TextSection("Активность, коммуникабельность, способность быстро принимать решения"));
+        resume1.setSection(SectionType.OBJECTIVE, new TextSection("JavaScript Developer"));
+        resume1.setSection(SectionType.ACHIEVEMENTS, new ListSection("Разработал фреймворк для внутренних нужд компании.", "Создал CMS под соцсеть.", "Создал CRM для рекламного агентства.", "Переделал архитектуру сайта компании, увеличив время загрузки."));
+        resume1.setSection(SectionType.QUALIFICATIONS, new ListSection("HTML5, CSS3, Bootstrap", "JavaScript, NodeJS, Ajax", "JQuery, Angular, Backbone, Socket.io, Vue, React, Redux", "PHP, Curl, MySQL, NoSQL", "WordPress, Joomla", "Photoshop, GIMP", "Английский язык: Intermediate"));
 
         List<Organization> experience = new ArrayList<>();
-        experience.add(new Organization("Organization2", null, new Organization.Position(2016, Month.FEBRUARY, "Software Designer", "Description")));
-        experience.add(new Organization("Organization1", null, new Organization.Position(2010, Month.SEPTEMBER, 2016, Month.JANUARY, "Software Designer", "Description")));
+        experience.add(new Organization("New Web Technologies", "https://new-web-technologies.ru", new Organization.Position(2016, Month.FEBRUARY, "Software Designer", "Создание архитектуры, оптимизация кода, вёрстка сайта и установка на CMS, разработка плагинов и парсеров.")));
+        experience.add(new Organization("ООО \"Web Systems\"", "https://web-systems.ru", new Organization.Position(2010, Month.SEPTEMBER, 2016, Month.JANUARY, "Web Designer", "Web-дизайн, верстка сайтов, разработка рекламной продукции (буклетов, баннеров, логотипов).")));
         resume1.setSection(SectionType.EXPERIENCE, new OrganizationsSection(experience));
 
         List<Organization> education = new ArrayList<>();
-        education.add(new Organization("Organization1", null, new Organization.Position(2004, Month.SEPTEMBER, 2010, Month.JANUARY, "University", null)));
+        education.add(new Organization("Modern Language", "https://modern-language.ru", new Organization.Position(2016, Month.NOVEMBER, 2017, Month.MARCH, "Слушатель курса", "Backend-разработка")));
+        education.add(new Organization("Just Learn", "https://just-learn.ru", new Organization.Position(2014, Month.OCTOBER, 2015, Month.FEBRUARY, "Слушатель курса", "Современные технологии веб-разработки")));
+        education.add(new Organization("Университет", null, new Organization.Position(2004, Month.SEPTEMBER, 2010, Month.JANUARY, "Студент", "Факультет прикладной информатики")));
         resume1.setSection(SectionType.EDUCATION, new OrganizationsSection(education));
         return resume1;
     }
@@ -53,28 +57,33 @@ public class ResumeTestData {
     public static Resume createResume2(String uuid, String fullName) {
         Resume resume2 = new Resume(uuid, fullName);
 
-        resume2.setContact(ContactType.PHONE, "22222");
+        resume2.setContact(ContactType.PHONE, "9002222222");
         resume2.setContact(ContactType.EMAIL, "email2@gmail.com");
         resume2.setContact(ContactType.SKYPE, "skype2");
         resume2.setContact(ContactType.GITHUB, "https://github.com/github2");
         resume2.setContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/22222");
         resume2.setContact(ContactType.HOME_PAGE, "https://homepage2.ru");
 
-        resume2.setSection(SectionType.PERSONAL, new TextSection("Personal"));
-        resume2.setSection(SectionType.OBJECTIVE, new TextSection("Objective"));
-        resume2.setSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1", "Achievement2", "Achievement3", "Achievement4"));
-        resume2.setSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1", "Qualification2", "Qualification3", "Qualification4"));
+        resume2.setSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, дисциплинированность, ориентированность на достижение цели, стрессоустойчивость"));
+        resume2.setSection(SectionType.OBJECTIVE, new TextSection("Java Developer"));
+        resume2.setSection(SectionType.ACHIEVEMENTS, new ListSection("Разработал модули web приложения, отвечающие за обработку клиентских запросов.", "Оптимизировал более 50000 строк кода: Java — 45000, JavaScript — 5000.", "Исправил более 50 ошибок ПО, найденных пользователями.", "Обеспечил переход приложения на новую версию Tomcat и PostgreSQL.", "Внедрил использование сложной структуры SQL-запросов вместо повторяющегося кода.", "Повысил безопасность данных шифрованием, используя base64_encode."));
+        resume2.setSection(SectionType.QUALIFICATIONS, new ListSection("Java SE, Java EE", "Java Servlets, JSP, JSF", "Spring (Core, MVC, Security)", "Hibernate", "Apache Tomcat", "Maven, Git", "SQL: MySQL, PostgreSQL", "NoSQL: MongoDB, Cassandra", "JavaScript, Python", "Json, XML, HTML, CSS", "SOAP", "Log4J", "JUnit", "Agile", "Английский язык: Upper-Intermediate"));
 
         List<Organization> experience = new ArrayList<>();
-        experience.add(new Organization("Organization3", "https://organization3.com", new Organization.Position(2018, Month.FEBRUARY, "Software Designer", "Description")));
-        experience.add(new Organization("Organization2", null, new Organization.Position(2015, Month.MARCH, 2018, Month.JANUARY, "Software Designer", "Description")));
-        experience.add(new Organization("Organization1", null, new Organization.Position(2010, Month.JUNE, 2015, Month.FEBRUARY, "Software Designer", "Description"),
-                new Organization.Position(2005, Month.SEPTEMBER, 2010, Month.MAY, "QA Automation Engineer", "Description")));
+        experience.add(new Organization("SW Incorporated", "https://sw-incorporated.com", new Organization.Position(2018, Month.FEBRUARY, "Java Developer", "Разработка новых модулей web приложения. Добавление функциональности к существующим модулям согласно требованиям заказчика. Исправление ошибок, найденных пользователями. Взаимодействие с заказчиком.")));
+        experience.add(new Organization("Soft Innovations", "https://soft-innovations.ru", new Organization.Position(2015, Month.MARCH, 2018, Month.JANUARY, "Software Designer", "Разработка архитектуры платформенного решения, программных модулей и интеграционных приложений. Поддержка работы решений и программное сопровождение проекта. Составление технической документации по разработанному ПО.")));
+        experience.add(new Organization("IT Engineering Solutions", "https://it-engineering-solutions.ru", new Organization.Position(2010, Month.JUNE, 2015, Month.FEBRUARY, "Software Designer", "Создание и поддержка HelpDesk. Внедрение и поддержка ЭЦП. Администрирование серверов Microsoft Windows Server 2003/2008/2012, AD, DNS, DHСP, 1С Бухгалтерия."),
+                new Organization.Position(2005, Month.SEPTEMBER, 2010, Month.MAY, "IT Engineer", "Поддержка IT инфраструктуры компании.")));
         resume2.setSection(SectionType.EXPERIENCE, new OrganizationsSection(experience));
 
         List<Organization> education = new ArrayList<>();
-        education.add(new Organization("Organization2", null, new Organization.Position(2015, Month.JANUARY, 2015, Month.MARCH, "Courses", null)));
-        education.add(new Organization("Organization1", null, new Organization.Position(1999, Month.SEPTEMBER, 2005, Month.JUNE, "University", null)));
+        education.add(new Organization("DB Courses", "https://db-courses.ru", new Organization.Position(2018, Month.APRIL, 2018, Month.JULY, "Слушатель курса", "Фундаментальный курс по SQL")));
+        education.add(new Organization("Best Java", "https://best-java.ru", new Organization.Position(2014, Month.SEPTEMBER, 2015, Month.FEBRUARY, "Слушатель курса", "Java SE"),
+                new Organization.Position(2017, Month.JUNE, 2017, Month.NOVEMBER, "Слушатель курса", "Java EE"),
+                new Organization.Position(2019, Month.MARCH, 2019, Month.DECEMBER, "Слушатель курса", "Spring Framework")));
+        education.add(new Organization("IT Resources", "https://it-resources.ru", new Organization.Position(2009, Month.OCTOBER, 2010, Month.JUNE, "Слушатель курса", "Программирование на Java")));
+        education.add(new Organization("Modern Nets", "https://modern-nets.ru", new Organization.Position(2008, Month.JANUARY, 2008, Month.APRIL, "Слушатель курса", "Оптимизация сетей")));
+        education.add(new Organization("Университет", null, new Organization.Position(1999, Month.SEPTEMBER, 2005, Month.JUNE, "Студент", "Факультет прикладной математики")));
         resume2.setSection(SectionType.EDUCATION, new OrganizationsSection(education));
 
         return resume2;
@@ -83,20 +92,22 @@ public class ResumeTestData {
     public static Resume createResume3(String uuid, String fullName) {
         Resume resume3 = new Resume(uuid, fullName);
 
-        resume3.setContact(ContactType.PHONE, "33333");
+        resume3.setContact(ContactType.PHONE, "9003333333");
         resume3.setContact(ContactType.EMAIL, "email3@mail.ru");
+        resume3.setContact(ContactType.SKYPE, "skype3");
 
-        resume3.setSection(SectionType.PERSONAL, new TextSection("Personal"));
-        resume3.setSection(SectionType.OBJECTIVE, new TextSection("Objective"));
-        resume3.setSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1"));
-        resume3.setSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1"));
+        resume3.setSection(SectionType.PERSONAL, new TextSection("Целеустремленность, быстрая адаптация к переменам, творческий подход к поставленным задачам"));
+        resume3.setSection(SectionType.OBJECTIVE, new TextSection("QA Engineer"));
+        resume3.setSection(SectionType.ACHIEVEMENTS, new ListSection("Обнаружено 253 программных ошибки, которые снижали производительность ПО.", "Оптимизирована применяемая методология тестирования."));
+        resume3.setSection(SectionType.QUALIFICATIONS, new ListSection("TestLink, TestRail", "HTML, CSS, JavaScript", "Git", "Jira", "Java", "Python", "Английский язык: чтение технической документации"));
 
         List<Organization> experience = new ArrayList<>();
-        experience.add(new Organization("Organization1", "https://organization1.ru", new Organization.Position(2018, Month.SEPTEMBER, "QA Automation Engineer", "Description")));
+        experience.add(new Organization("ООО \"Soft Engine\"", "https://soft-engine.ru", new Organization.Position(2018, Month.SEPTEMBER, "QA Engineer", "Участие в разработке тест-кейсов, ручное и автоматизированное тестирование, документирование результатов.")));
         resume3.setSection(SectionType.EXPERIENCE, new OrganizationsSection(experience));
 
         List<Organization> education = new ArrayList<>();
-        education.add(new Organization("Organization1", null, new Organization.Position(2014, Month.SEPTEMBER, 2018, Month.JANUARY, "University", null)));
+        education.add(new Organization("IT School", "https://it-school.ru", new Organization.Position(2019, Month.NOVEMBER, 2020, Month.MARCH, "Слушатель курса", "Автоматизация тестирования веб-приложений")));
+        education.add(new Organization("Университет", null, new Organization.Position(2014, Month.SEPTEMBER, 2018, Month.JANUARY, "Студент", "Факультет информационных систем")));
         resume3.setSection(SectionType.EDUCATION, new OrganizationsSection(education));
 
         return resume3;
@@ -105,8 +116,18 @@ public class ResumeTestData {
     public static Resume createResume4(String uuid, String fullName) {
         Resume resume4 = new Resume(uuid, fullName);
 
-        resume4.setContact(ContactType.PHONE, "44444");
+        resume4.setContact(ContactType.PHONE, "9004444444");
         resume4.setContact(ContactType.EMAIL, "email4@mail.ru");
+
+        resume4.setSection(SectionType.PERSONAL, new TextSection("Оптимизм, стремление к самосовершенствованию и развитию"));
+        resume4.setSection(SectionType.OBJECTIVE, new TextSection("Frontend Developer"));
+        resume4.setSection(SectionType.ACHIEVEMENTS, new ListSection("Занял 3 место в олимпиаде по информатике среди ВУЗов", "Создал тестовое web приложение 'Библиотека'"));
+        resume4.setSection(SectionType.QUALIFICATIONS, new ListSection("JavaScript", "HTML", "CSS", "Bootstrap", "Английский язык: средний уровень"));
+
+        List<Organization> education = new ArrayList<>();
+        education.add(new Organization("Институт информатики", null, new Organization.Position(2018, Month.SEPTEMBER, "Студент", "Факультет информатики")));
+        education.add(new Organization("Учебный центр", null, new Organization.Position(2019, Month.SEPTEMBER, 2020, Month.APRIL, "Слушатель курса", "Программирование на JavaScript")));
+        resume4.setSection(SectionType.EDUCATION, new OrganizationsSection(education));
 
         return resume4;
     }
@@ -114,7 +135,7 @@ public class ResumeTestData {
     public static Resume createGK(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
 
-        resume.setContact(ContactType.PHONE, "+7(921) 855-0482");
+        resume.setContact(ContactType.PHONE, "9001234567");
         resume.setContact(ContactType.SKYPE, "grigory.kislin");
         resume.setContact(ContactType.EMAIL, "gkislin@yandex.ru");
         resume.setContact(ContactType.GITHUB, "https://github.com/gkislin");
@@ -148,7 +169,7 @@ public class ResumeTestData {
         qualifications.add("Технологии: Servlet, JSP/JSTL, JAX-WS, REST, EJB, RMI, JMS, JavaMail, JAXB, StAX, SAX, DOM, XSLT, MDB, JMX, JDBC, JPA, JNDI, JAAS, SOAP, AJAX, Commet, HTML5, ESB, CMIS, BPMN2, LDAP, OAuth1, OAuth2, JWT");
         qualifications.add("Инструменты: Maven + plugin development, Gradle, настройка Ngnix");
         qualifications.add("администрирование Hudson/Jenkins, Ant + custom task, SoapUI, JPublisher, Flyway, Nagios, iReport, OpenCmis, Bonita, pgBouncer");
-        qualifications.add("Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектрирования, архитектурных шаблонов, UML, функционального программирования");
+        qualifications.add("Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектирования, архитектурных шаблонов, UML, функционального программирования");
         qualifications.add("Родной русский, английский \"upper intermediate\"");
 
         resume.setSection(SectionType.QUALIFICATIONS, new ListSection(qualifications));
@@ -166,12 +187,12 @@ public class ResumeTestData {
         resume.setSection(SectionType.EXPERIENCE, new OrganizationsSection(experience));
 
         List<Organization> education = new ArrayList<>();
-        education.add(new Organization("Coursera", null, new Organization.Position(2013, Month.MARCH, 2013, Month.MAY, "\"Functional Programming Principles in Scala\" by Martin Odersky", null)));
-        education.add(new Organization("Luxoft", null, new Organization.Position(2011, Month.MARCH, 2011, Month.APRIL, "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"", null)));
-        education.add(new Organization("Siemens AG", null, new Organization.Position(2005, Month.JANUARY, 2005, Month.APRIL, "3 месяца обучения мобильным IN сетям (Берлин)", null)));
-        education.add(new Organization("Alcatel", null, new Organization.Position(1997, Month.SEPTEMBER, 1998, Month.MARCH, "6 месяцев обучения цифровым телефонным сетям (Москва)", null)));
-        education.add(new Organization("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики", null, new Organization.Position(1993, Month.SEPTEMBER, 1996, Month.JULY, "Аспирантура (программист С, С++)", null), new Organization.Position(1987, Month.SEPTEMBER, 1993, Month.JULY, "Инженер (программист Fortran, C)", null)));
-        education.add(new Organization("Заочная физико-техническая школа при МФТИ", null, new Organization.Position(1984, Month.SEPTEMBER, 1987, Month.JUNE, "Закончил с отличием", null)));
+        education.add(new Organization("Coursera", null, new Organization.Position(2013, Month.MARCH, 2013, Month.MAY, "Слушатель курса", "\"Functional Programming Principles in Scala\" by Martin Odersky")));
+        education.add(new Organization("Luxoft", null, new Organization.Position(2011, Month.MARCH, 2011, Month.APRIL, "Слушатель курса", "\"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"")));
+        education.add(new Organization("Siemens AG", null, new Organization.Position(2005, Month.JANUARY, 2005, Month.APRIL, "Слушатель курса", "3 месяца обучения мобильным IN сетям (Берлин)")));
+        education.add(new Organization("Alcatel", null, new Organization.Position(1997, Month.SEPTEMBER, 1998, Month.MARCH, "Слушатель курса", "6 месяцев обучения цифровым телефонным сетям (Москва)")));
+        education.add(new Organization("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики", null, new Organization.Position(1993, Month.SEPTEMBER, 1996, Month.JULY, "Аспирант (программист С, С++)", null), new Organization.Position(1987, Month.SEPTEMBER, 1993, Month.JULY, "Инженер (программист Fortran, C)", null)));
+        education.add(new Organization("Заочная физико-техническая школа при МФТИ", null, new Organization.Position(1984, Month.SEPTEMBER, 1987, Month.JUNE, "Студент", "Закончил с отличием")));
 
         resume.setSection(SectionType.EDUCATION, new OrganizationsSection(education));
 
@@ -179,26 +200,13 @@ public class ResumeTestData {
     }
 
     public static void main(String[] args) {
-        Resume resume = createGK("uuid1", "Григорий Кислин");
-
-        System.out.println(resume.getUuid());
-        System.out.println(resume.getFullName());
-        System.out.println();
-        for (Map.Entry<ContactType, String> entry : resume.getContacts().entrySet()) {
-            System.out.println(entry.getKey().getTitle() + ": " + entry.getValue());
-        }
-        System.out.println();
-        for (Map.Entry<SectionType, Section> entry : resume.getSections().entrySet()) {
-            System.out.println(entry.getKey().getTitle() + ": ");
-            System.out.println(entry.getValue());
-        }
-        System.out.println();
-
-        String contactSkype = resume.getContact(ContactType.SKYPE);
-        System.out.println(contactSkype);
-        Section sectionPersonal = resume.getSection(SectionType.PERSONAL);
-        System.out.println(sectionPersonal);
-        Section sectionEducation = resume.getSection(SectionType.EDUCATION);
-        System.out.println(sectionEducation);
+        Storage storage = Config.getInstance().getStorage();
+        storage.clear();
+        storage.save(RESUME_1);
+        storage.save(RESUME_2);
+        storage.save(RESUME_3);
+        storage.save(RESUME_4);
+        storage.save(RESUME_5);
+        System.out.println("Populating database is complete!");
     }
 }

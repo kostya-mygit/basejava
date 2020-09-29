@@ -1,0 +1,2 @@
+mvn -B -DskipTests clean dependency:list install
+heroku war:deploy target/basejava-1.0-SNAPSHOT.war --app kostya-mybasejava

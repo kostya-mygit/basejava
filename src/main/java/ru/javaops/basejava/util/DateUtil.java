@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class DateUtil {
     public static final LocalDate NOW = LocalDate.of(3000, 1, 1);
-    public static final String STR_NOW = "Сейчас";
+    public static final String STR_NOW = "Настоящее время";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MM/yyyy");
 
     public static LocalDate of(int year, Month month) {
