@@ -17,7 +17,7 @@ public abstract class AbstractArrayStorageTest extends AbstractStorageTest {
 
     @Test
     void saveStorageFull() {
-        for (int i = 3; i < STORAGE_LIMIT; i++) {
+        for (int i = 4; i < STORAGE_LIMIT; i++) {
             storage.save(new Resume("Full Name" + i));
         }
         assertEquals(STORAGE_LIMIT, storage.size());
@@ -26,7 +26,7 @@ public abstract class AbstractArrayStorageTest extends AbstractStorageTest {
     @Test
     void saveStorageOverflow() {
         try {
-            for (int i = 3; i < STORAGE_LIMIT; i++) {
+            for (int i = 4; i < STORAGE_LIMIT; i++) {
                 storage.save(new Resume("Full Name" + i));
             }
         } catch (StorageException e) {

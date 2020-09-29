@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <resume>
     <uuid>ba18773e-5b32-41c1-bfa7-9eb225495998</uuid>
-    <fullName>Alex A</fullName>
+    <fullName>Алексей Антонов</fullName>
     <contacts>
         <entry>
             <key>PHONE</key>
@@ -32,31 +32,44 @@
         <entry>
             <key>OBJECTIVE</key>
             <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <content>Objective</content>
+                <content>Java Developer</content>
             </value>
         </entry>
         <entry>
             <key>PERSONAL</key>
             <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <content>Personal</content>
+                <content>Аналитический склад ума, дисциплинированность, ориентированность на достижение цели, стрессоустойчивость</content>
             </value>
         </entry>
         <entry>
             <key>ACHIEVEMENTS</key>
             <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <items>Achievement1</items>
-                <items>Achievement2</items>
-                <items>Achievement3</items>
-                <items>Achievement4</items>
+                <items>Разработал модули web приложения, отвечающие за обработку клиентских запросов.</items>
+                <items>Оптимизировал более 50000 строк кода: Java — 45000, JavaScript — 5000.</items>
+                <items>Исправил более 50 ошибок ПО, найденных пользователями.</items>
+                <items>Обеспечил переход приложения на новую версию Tomcat и PostgreSQL.</items>
+                <items>Внедрил использование сложной структуры SQL-запросов вместо повторяющегося кода.</items>
+                <items>Повысил безопасность данных шифрованием, используя base64_encode.</items>
             </value>
         </entry>
         <entry>
             <key>QUALIFICATIONS</key>
             <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <items>Qualification1</items>
-                <items>Qualification2</items>
-                <items>Qualification3</items>
-                <items>Qualification4</items>
+                <items>Java SE, Java EE</items>
+                <items>Java Servlets, JSP, JSF</items>
+                <items>Spring (Core, MVC, Security)</items>
+                <items>Hibernate</items>
+                <items>Apache Tomcat</items>
+                <items>Maven, Git</items>
+                <items>SQL: MySQL, PostgreSQL</items>
+                <items>NoSQL: MongoDB, Cassandra</items>
+                <items>JavaScript, Python</items>
+                <items>Json, XML, HTML, CSS</items>
+                <items>SOAP</items>
+                <items>Log4J</items>
+                <items>JUnit</items>
+                <items>Agile</items>
+                <items>Английский язык: Upper-Intermediate</items>
             </value>
         </entry>
         <entry>
@@ -64,44 +77,44 @@
             <value xsi:type="organizationsSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <organizations>
                     <homePage>
-                        <name>Organization3</name>
-                        <url>https://organization3.com</url>
+                        <name>SW Incorporated</name>
+                        <url>https://sw-incorporated.com</url>
                     </homePage>
                     <positions>
                         <startDate>2018-02-01</startDate>
                         <endDate>3000-01-01</endDate>
-                        <title>Software Designer</title>
-                        <description>Description</description>
+                        <title>Java Developer</title>
+                        <description>Разработка новых модулей web приложения. Добавление функциональности к существующим модулям согласно требованиям заказчика. Исправление ошибок, найденных пользователями. Взаимодействие с заказчиком.</description>
                     </positions>
                 </organizations>
                 <organizations>
                     <homePage>
-                        <name>Organization2</name>
-                        <url></url>
+                        <name>Soft Innovations</name>
+                        <url>https://soft-innovations.ru</url>
                     </homePage>
                     <positions>
                         <startDate>2015-03-01</startDate>
                         <endDate>2018-01-01</endDate>
                         <title>Software Designer</title>
-                        <description>Description</description>
+                        <description>Разработка архитектуры платформенного решения, программных модулей и интеграционных приложений. Поддержка работы решений и программное сопровождение проекта. Составление технической документации по разработанному ПО.</description>
                     </positions>
                 </organizations>
                 <organizations>
                     <homePage>
-                        <name>Organization1</name>
-                        <url></url>
+                        <name>IT Engineering Solutions</name>
+                        <url>https://it-engineering-solutions.ru</url>
                     </homePage>
                     <positions>
                         <startDate>2010-06-01</startDate>
                         <endDate>2015-02-01</endDate>
                         <title>Software Designer</title>
-                        <description>Description</description>
+                        <description>Создание и поддержка HelpDesk. Внедрение и поддержка ЭЦП. Администрирование серверов Microsoft Windows Server 2003/2008/2012, AD, DNS, DHСP, 1С Бухгалтерия.</description>
                     </positions>
                     <positions>
                         <startDate>2005-09-01</startDate>
                         <endDate>2010-05-01</endDate>
-                        <title>QA Automation Engineer</title>
-                        <description>Description</description>
+                        <title>IT Engineer</title>
+                        <description>Поддержка IT инфраструктуры компании.</description>
                     </positions>
                 </organizations>
             </value>
@@ -111,26 +124,74 @@
             <value xsi:type="organizationsSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <organizations>
                     <homePage>
-                        <name>Organization2</name>
-                        <url></url>
+                        <name>DB Courses</name>
+                        <url>https://db-courses.ru</url>
                     </homePage>
                     <positions>
-                        <startDate>2015-01-01</startDate>
-                        <endDate>2015-03-01</endDate>
-                        <title>Courses</title>
-                        <description></description>
+                        <startDate>2018-04-01</startDate>
+                        <endDate>2018-07-01</endDate>
+                        <title>Слушатель курса</title>
+                        <description>Фундаментальный курс по SQL</description>
                     </positions>
                 </organizations>
                 <organizations>
                     <homePage>
-                        <name>Organization1</name>
+                        <name>Best Java</name>
+                        <url>https://best-java.ru</url>
+                    </homePage>
+                    <positions>
+                        <startDate>2014-09-01</startDate>
+                        <endDate>2015-02-01</endDate>
+                        <title>Слушатель курса</title>
+                        <description>Java SE</description>
+                    </positions>
+                    <positions>
+                        <startDate>2017-06-01</startDate>
+                        <endDate>2017-11-01</endDate>
+                        <title>Слушатель курса</title>
+                        <description>Java EE</description>
+                    </positions>
+                    <positions>
+                        <startDate>2019-03-01</startDate>
+                        <endDate>2019-12-01</endDate>
+                        <title>Слушатель курса</title>
+                        <description>Spring Framework</description>
+                    </positions>
+                </organizations>
+                <organizations>
+                    <homePage>
+                        <name>IT Resources</name>
+                        <url>https://it-resources.ru</url>
+                    </homePage>
+                    <positions>
+                        <startDate>2009-10-01</startDate>
+                        <endDate>2010-06-01</endDate>
+                        <title>Слушатель курса</title>
+                        <description>Программирование на Java</description>
+                    </positions>
+                </organizations>
+                <organizations>
+                    <homePage>
+                        <name>Modern Nets</name>
+                        <url>https://modern-nets.ru</url>
+                    </homePage>
+                    <positions>
+                        <startDate>2008-01-01</startDate>
+                        <endDate>2008-04-01</endDate>
+                        <title>Слушатель курса</title>
+                        <description>Оптимизация сетей</description>
+                    </positions>
+                </organizations>
+                <organizations>
+                    <homePage>
+                        <name>Университет</name>
                         <url></url>
                     </homePage>
                     <positions>
                         <startDate>1999-09-01</startDate>
                         <endDate>2005-06-01</endDate>
-                        <title>University</title>
-                        <description></description>
+                        <title>Студент</title>
+                        <description>Факультет прикладной математики</description>
                     </positions>
                 </organizations>
             </value>

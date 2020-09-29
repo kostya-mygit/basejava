@@ -1,42 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <resume>
     <uuid>a751ceb9-c3bf-44e9-a073-a0c130eee359</uuid>
-    <fullName>Anton A</fullName>
+    <fullName>Александр Алешин</fullName>
     <contacts>
         <entry>
             <key>PHONE</key>
             <value>9001111111</value>
         </entry>
         <entry>
+            <key>SKYPE</key>
+            <value>skype1</value>
+        </entry>
+        <entry>
             <key>EMAIL</key>
             <value>email1@mail.ru</value>
+        </entry>
+        <entry>
+            <key>GITHUB</key>
+            <value>https://github.com/github1</value>
         </entry>
     </contacts>
     <sections>
         <entry>
             <key>OBJECTIVE</key>
             <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <content>Objective</content>
+                <content>JavaScript Developer</content>
             </value>
         </entry>
         <entry>
             <key>PERSONAL</key>
             <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <content>Personal</content>
+                <content>Активность, коммуникабельность, способность быстро принимать решения</content>
             </value>
         </entry>
         <entry>
             <key>ACHIEVEMENTS</key>
             <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <items>Achievement1</items>
-                <items>Achievement2</items>
+                <items>Разработал фреймворк для внутренних нужд компании.</items>
+                <items>Создал CMS под соцсеть.</items>
+                <items>Создал CRM для рекламного агентства.</items>
+                <items>Переделал архитектуру сайта компании, увеличив время загрузки.</items>
             </value>
         </entry>
         <entry>
             <key>QUALIFICATIONS</key>
             <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <items>Qualification1</items>
-                <items>Qualification2</items>
+                <items>HTML5, CSS3, Bootstrap</items>
+                <items>JavaScript, NodeJS, Ajax</items>
+                <items>JQuery, Angular, Backbone, Socket.io, Vue, React, Redux</items>
+                <items>PHP, Curl, MySQL, NoSQL</items>
+                <items>WordPress, Joomla</items>
+                <items>Photoshop, GIMP</items>
+                <items>Английский язык: Intermediate</items>
             </value>
         </entry>
         <entry>
@@ -44,26 +59,26 @@
             <value xsi:type="organizationsSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <organizations>
                     <homePage>
-                        <name>Organization2</name>
-                        <url></url>
+                        <name>New Web Technologies</name>
+                        <url>https://new-web-technologies.ru</url>
                     </homePage>
                     <positions>
                         <startDate>2016-02-01</startDate>
                         <endDate>3000-01-01</endDate>
                         <title>Software Designer</title>
-                        <description>Description</description>
+                        <description>Создание архитектуры, оптимизация кода, вёрстка сайта и установка на CMS, разработка плагинов и парсеров.</description>
                     </positions>
                 </organizations>
                 <organizations>
                     <homePage>
-                        <name>Organization1</name>
-                        <url></url>
+                        <name>ООО "Web Systems"</name>
+                        <url>https://web-systems.ru</url>
                     </homePage>
                     <positions>
                         <startDate>2010-09-01</startDate>
                         <endDate>2016-01-01</endDate>
-                        <title>Software Designer</title>
-                        <description>Description</description>
+                        <title>Web Designer</title>
+                        <description>Web-дизайн, верстка сайтов, разработка рекламной продукции (буклетов, баннеров, логотипов).</description>
                     </positions>
                 </organizations>
             </value>
@@ -73,14 +88,38 @@
             <value xsi:type="organizationsSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <organizations>
                     <homePage>
-                        <name>Organization1</name>
+                        <name>Modern Language</name>
+                        <url>https://modern-language.ru</url>
+                    </homePage>
+                    <positions>
+                        <startDate>2016-11-01</startDate>
+                        <endDate>2017-03-01</endDate>
+                        <title>Слушатель курса</title>
+                        <description>Backend-разработка</description>
+                    </positions>
+                </organizations>
+                <organizations>
+                    <homePage>
+                        <name>Just Learn</name>
+                        <url>https://just-learn.ru</url>
+                    </homePage>
+                    <positions>
+                        <startDate>2014-10-01</startDate>
+                        <endDate>2015-02-01</endDate>
+                        <title>Слушатель курса</title>
+                        <description>Современные технологии веб-разработки</description>
+                    </positions>
+                </organizations>
+                <organizations>
+                    <homePage>
+                        <name>Университет</name>
                         <url></url>
                     </homePage>
                     <positions>
                         <startDate>2004-09-01</startDate>
                         <endDate>2010-01-01</endDate>
-                        <title>University</title>
-                        <description></description>
+                        <title>Студент</title>
+                        <description>Факультет прикладной информатики</description>
                     </positions>
                 </organizations>
             </value>

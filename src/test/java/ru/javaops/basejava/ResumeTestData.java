@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResumeTestData {
+    public static final String UUID_0 = "0f40df2e-593e-4980-acb5-05ba3d5ac044";
     public static final String UUID_1 = "a751ceb9-c3bf-44e9-a073-a0c130eee359";
     public static final String UUID_2 = "ba18773e-5b32-41c1-bfa7-9eb225495998";
     public static final String UUID_3 = "c04c0f94-6126-460a-85a2-840adc38866d";
     public static final String UUID_4 = "df34b72f-07ec-4086-808d-abd2ce972955";
     public static final String UUID_5 = "fg09k56f-e9ec-1278-b051-usa45tr72523";
 
+    public static Resume RESUME_0;
     public static Resume RESUME_1;
     public static Resume RESUME_2;
     public static Resume RESUME_3;
@@ -21,11 +23,38 @@ public class ResumeTestData {
     public static Resume RESUME_5;
 
     static {
+        RESUME_0 = createResume0(UUID_0, "Тестовый Пользователь");
         RESUME_1 = createResume1(UUID_1, "Александр Алешин");
         RESUME_2 = createResume2(UUID_2, "Алексей Антонов");
         RESUME_3 = createResume3(UUID_3, "Алексей Антонов");
         RESUME_4 = createResume4(UUID_4, "Антон Андреев");
         RESUME_5 = createGK(UUID_5, "Григорий Кислин");
+    }
+
+    public static Resume createResume0(String uuid, String fullName) {
+        Resume resume0 = new Resume(uuid, fullName);
+
+        resume0.setContact(ContactType.PHONE, "9001001000");
+        resume0.setContact(ContactType.EMAIL, "email@gmail.com");
+        resume0.setContact(ContactType.SKYPE, "skype");
+        resume0.setContact(ContactType.GITHUB, "https://github.com/github");
+        resume0.setContact(ContactType.HOME_PAGE, "https://homepage.ru");
+
+        resume0.setSection(SectionType.PERSONAL, new TextSection("Personal"));
+        resume0.setSection(SectionType.OBJECTIVE, new TextSection("Objective"));
+        resume0.setSection(SectionType.ACHIEVEMENTS, new ListSection("Achievement1", "Achievement2"));
+        resume0.setSection(SectionType.QUALIFICATIONS, new ListSection("Qualification1", "Qualification2"));
+
+        List<Organization> experience = new ArrayList<>();
+        experience.add(new Organization("Organization2", null, new Organization.Position(2016, Month.FEBRUARY, "Software Designer", "Description")));
+        experience.add(new Organization("Organization1", null, new Organization.Position(2010, Month.SEPTEMBER, 2016, Month.JANUARY, "Software Designer", "Description")));
+        resume0.setSection(SectionType.EXPERIENCE, new OrganizationsSection(experience));
+
+        List<Organization> education = new ArrayList<>();
+        education.add(new Organization("Organization1", null, new Organization.Position(2004, Month.SEPTEMBER, 2010, Month.JANUARY, "University", null)));
+        resume0.setSection(SectionType.EDUCATION, new OrganizationsSection(education));
+
+        return resume0;
     }
 
     public static Resume createResume1(String uuid, String fullName) {
@@ -51,6 +80,7 @@ public class ResumeTestData {
         education.add(new Organization("Just Learn", "https://just-learn.ru", new Organization.Position(2014, Month.OCTOBER, 2015, Month.FEBRUARY, "Слушатель курса", "Современные технологии веб-разработки")));
         education.add(new Organization("Университет", null, new Organization.Position(2004, Month.SEPTEMBER, 2010, Month.JANUARY, "Студент", "Факультет прикладной информатики")));
         resume1.setSection(SectionType.EDUCATION, new OrganizationsSection(education));
+
         return resume1;
     }
 

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <resume>
     <uuid>c04c0f94-6126-460a-85a2-840adc38866d</uuid>
-    <fullName>Alex A</fullName>
+    <fullName>Алексей Антонов</fullName>
     <contacts>
         <entry>
             <key>PHONE</key>
             <value>9003333333</value>
+        </entry>
+        <entry>
+            <key>SKYPE</key>
+            <value>skype3</value>
         </entry>
         <entry>
             <key>EMAIL</key>
@@ -16,25 +20,32 @@
         <entry>
             <key>OBJECTIVE</key>
             <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <content>Objective</content>
+                <content>QA Engineer</content>
             </value>
         </entry>
         <entry>
             <key>PERSONAL</key>
             <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <content>Personal</content>
+                <content>Целеустремленность, быстрая адаптация к переменам, творческий подход к поставленным задачам</content>
             </value>
         </entry>
         <entry>
             <key>ACHIEVEMENTS</key>
             <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <items>Achievement1</items>
+                <items>Обнаружено 253 программных ошибки, которые снижали производительность ПО.</items>
+                <items>Оптимизирована применяемая методология тестирования.</items>
             </value>
         </entry>
         <entry>
             <key>QUALIFICATIONS</key>
             <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <items>Qualification1</items>
+                <items>TestLink, TestRail</items>
+                <items>HTML, CSS, JavaScript</items>
+                <items>Git</items>
+                <items>Jira</items>
+                <items>Java</items>
+                <items>Python</items>
+                <items>Английский язык: чтение технической документации</items>
             </value>
         </entry>
         <entry>
@@ -42,14 +53,14 @@
             <value xsi:type="organizationsSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <organizations>
                     <homePage>
-                        <name>Organization1</name>
-                        <url>https://organization1.ru</url>
+                        <name>ООО "Soft Engine"</name>
+                        <url>https://soft-engine.ru</url>
                     </homePage>
                     <positions>
                         <startDate>2018-09-01</startDate>
                         <endDate>3000-01-01</endDate>
-                        <title>QA Automation Engineer</title>
-                        <description>Description</description>
+                        <title>QA Engineer</title>
+                        <description>Участие в разработке тест-кейсов, ручное и автоматизированное тестирование, документирование результатов.</description>
                     </positions>
                 </organizations>
             </value>
@@ -59,14 +70,26 @@
             <value xsi:type="organizationsSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <organizations>
                     <homePage>
-                        <name>Organization1</name>
+                        <name>IT School</name>
+                        <url>https://it-school.ru</url>
+                    </homePage>
+                    <positions>
+                        <startDate>2019-11-01</startDate>
+                        <endDate>2020-03-01</endDate>
+                        <title>Слушатель курса</title>
+                        <description>Автоматизация тестирования веб-приложений</description>
+                    </positions>
+                </organizations>
+                <organizations>
+                    <homePage>
+                        <name>Университет</name>
                         <url></url>
                     </homePage>
                     <positions>
                         <startDate>2014-09-01</startDate>
                         <endDate>2018-01-01</endDate>
-                        <title>University</title>
-                        <description></description>
+                        <title>Студент</title>
+                        <description>Факультет информационных систем</description>
                     </positions>
                 </organizations>
             </value>

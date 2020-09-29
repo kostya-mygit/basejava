@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resume>
+    <uuid>df34b72f-07ec-4086-808d-abd2ce972955</uuid>
+    <fullName>Антон Андреев</fullName>
+    <contacts>
+        <entry>
+            <key>PHONE</key>
+            <value>9004444444</value>
+        </entry>
+        <entry>
+            <key>EMAIL</key>
+            <value>email4@mail.ru</value>
+        </entry>
+    </contacts>
+    <sections>
+        <entry>
+            <key>OBJECTIVE</key>
+            <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <content>Frontend Developer</content>
+            </value>
+        </entry>
+        <entry>
+            <key>PERSONAL</key>
+            <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <content>Оптимизм, стремление к самосовершенствованию и развитию</content>
+            </value>
+        </entry>
+        <entry>
+            <key>ACHIEVEMENTS</key>
+            <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <items>Занял 3 место в олимпиаде по информатике среди ВУЗов</items>
+                <items>Создал тестовое web приложение 'Библиотека'</items>
+            </value>
+        </entry>
+        <entry>
+            <key>QUALIFICATIONS</key>
+            <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <items>JavaScript</items>
+                <items>HTML</items>
+                <items>CSS</items>
+                <items>Bootstrap</items>
+                <items>Английский язык: средний уровень</items>
+            </value>
+        </entry>
+        <entry>
+            <key>EDUCATION</key>
+            <value xsi:type="organizationsSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <organizations>
+                    <homePage>
+                        <name>Институт информатики</name>
+                        <url></url>
+                    </homePage>
+                    <positions>
+                        <startDate>2018-09-01</startDate>
+                        <endDate>3000-01-01</endDate>
+                        <title>Студент</title>
+                        <description>Факультет информатики</description>
+                    </positions>
+                </organizations>
+                <organizations>
+                    <homePage>
+                        <name>Учебный центр</name>
+                        <url></url>
+                    </homePage>
+                    <positions>
+                        <startDate>2019-09-01</startDate>
+                        <endDate>2020-04-01</endDate>
+                        <title>Слушатель курса</title>
+                        <description>Программирование на JavaScript</description>
+                    </positions>
+                </organizations>
+            </value>
+        </entry>
+    </sections>
+</resume>
